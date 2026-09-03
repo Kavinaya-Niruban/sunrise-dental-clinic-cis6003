@@ -35,6 +35,7 @@ public class BillDAO {
         }
     }
 
+
     public Bill findByAppointmentId(int appointmentId) {
 
         String sql = """
@@ -48,6 +49,41 @@ public class BillDAO {
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
             statement.setInt(1, appointmentId);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+
+                return new Bill(
+                        resultSet.getInt("bill_id"),
+                        resultSet.getInt("appointment_id"),
+                        resultSet.getDouble("treatment_cost"),
+                        resultSet.getDouble("consultation_fee"),
+                        resultSet.getDouble("total_amount")
+                );
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+
+    public Bill findById(int billId) {
+
+        String sql = """
+                SELECT bill_id, appointment_id, treatment_cost,
+                       consultation_fee, total_amount
+                FROM bills
+                WHERE bill_id = ?
+                """;
+
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, billId);
 
             ResultSet resultSet = statement.executeQuery();
 
