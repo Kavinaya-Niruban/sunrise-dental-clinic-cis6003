@@ -1,4 +1,3 @@
-
 package org.example.dao;
 
 import org.example.model.Patient;
@@ -8,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PatientDAO {
 
@@ -39,5 +40,38 @@ public class PatientDAO {
         }
 
         return -1;
+    }
+
+    public List<Patient> getAllPatients() {
+
+        List<Patient> patients = new ArrayList<>();
+
+        String sql = """
+                SELECT patient_id, patient_name, address, contact_number
+                FROM patients
+                ORDER BY patient_id DESC
+                """;
+
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery()) {
+
+            while (resultSet.next()) {
+
+                Patient patient = new Patient(
+                        resultSet.getInt("patient_id"),
+                        resultSet.getString("patient_name"),
+                        resultSet.getString("address"),
+                        resultSet.getString("contact_number")
+                );
+
+                patients.add(patient);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return patients;
     }
 }

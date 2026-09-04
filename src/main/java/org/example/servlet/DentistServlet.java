@@ -5,21 +5,17 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.example.model.Patient;
-import org.example.service.PatientService;
+import org.example.model.Dentist;
+import org.example.service.DentistService;
 
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/patients")
-public class PatientServlet extends HttpServlet {
+@WebServlet("/dentists")
+public class DentistServlet extends HttpServlet {
 
-    private PatientService patientService;
-
-    @Override
-    public void init() throws ServletException {
-        patientService = new PatientService();
-    }
+    private final DentistService dentistService =
+            new DentistService();
 
     @Override
     protected void doGet(
@@ -29,31 +25,29 @@ public class PatientServlet extends HttpServlet {
 
         try {
 
-            List<Patient> patients =
-                    patientService.getAllPatients();
+            List<Dentist> dentists =
+                    dentistService.getAllDentists();
 
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
 
             response.getWriter().print("[");
 
-            for (int i = 0; i < patients.size(); i++) {
+            for (int i = 0; i < dentists.size(); i++) {
 
-                Patient patient = patients.get(i);
+                Dentist dentist = dentists.get(i);
 
                 response.getWriter().print(
-                        "{\"patientId\":" +
-                                patient.getPatientId() +
-                                ",\"patientName\":\"" +
-                                patient.getPatientName().replace("\"", "\\\"") +
-                                "\",\"address\":\"" +
-                                patient.getAddress().replace("\"", "\\\"") +
+                        "{\"dentistId\":" +
+                                dentist.getDentistId() +
+                                ",\"dentistName\":\"" +
+                                dentist.getDentistName().replace("\"", "\\\"") +
                                 "\",\"contactNumber\":\"" +
-                                patient.getContactNumber().replace("\"", "\\\"") +
+                                dentist.getContactNumber().replace("\"", "\\\"") +
                                 "\"}"
                 );
 
-                if (i < patients.size() - 1) {
+                if (i < dentists.size() - 1) {
                     response.getWriter().print(",");
                 }
             }
@@ -69,7 +63,7 @@ public class PatientServlet extends HttpServlet {
             );
 
             response.getWriter().print(
-                    "{\"error\":\"Unable to load patients\"}"
+                    "{\"error\":\"Unable to load dentists\"}"
             );
         }
     }
@@ -82,34 +76,30 @@ public class PatientServlet extends HttpServlet {
 
         try {
 
-            String patientName =
-                    request.getParameter("patientName");
-
-            String address =
-                    request.getParameter("address");
+            String dentistName =
+                    request.getParameter("dentistName");
 
             String contactNumber =
                     request.getParameter("contactNumber");
 
-            Patient patient = new Patient();
+            Dentist dentist = new Dentist();
 
-            patient.setPatientName(patientName);
-            patient.setAddress(address);
-            patient.setContactNumber(contactNumber);
+            dentist.setDentistName(dentistName);
+            dentist.setContactNumber(contactNumber);
 
-            int patientId =
-                    patientService.registerPatient(patient);
+            int dentistId =
+                    dentistService.addDentist(dentist);
 
-            if (patientId > 0) {
+            if (dentistId > 0) {
 
                 response.sendRedirect(
-                        "patients.html?success=true&patientId=" + patientId
+                        "dentists.html?success=true"
                 );
 
             } else {
 
                 response.sendRedirect(
-                        "patients.html?error=true"
+                        "dentists.html?error=true"
                 );
             }
 
@@ -118,7 +108,7 @@ public class PatientServlet extends HttpServlet {
             e.printStackTrace();
 
             response.sendRedirect(
-                    "patients.html?error=invalid"
+                    "dentists.html?error=invalid"
             );
         }
     }

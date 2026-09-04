@@ -79,12 +79,12 @@
         }
 
         .form-grid{
-            display:grid;grid-template-columns:repeat(3,1fr);gap:18px
+            display:grid;grid-template-columns:repeat(2,1fr);gap:18px
         }
 
         label{display:block;font-size:13px;font-weight:600;margin-bottom:7px}
 
-        input,select{
+        input{
             width:100%;padding:12px;border:1px solid #c9dfe2;
             border-radius:9px;background:white;outline:none
         }
@@ -109,8 +109,16 @@
             color:#2e9b73;font-weight:600
         }
 
-        .unavailable{
-            color:#c24d4d;font-weight:600
+        .loading{
+            text-align:center;
+            color:#789097;
+            padding:25px;
+        }
+
+        .error{
+            text-align:center;
+            color:#c24d4d;
+            padding:25px;
         }
 
         @media(max-width:900px){
@@ -158,7 +166,7 @@
     <div class="topbar">
         <div>
             <h1>Dentists</h1>
-            <p>Manage clinic dentists and availability.</p>
+            <p>Manage clinic dentists and contact information.</p>
         </div>
 
         <div class="profile">
@@ -173,30 +181,26 @@
             <h2>Add Dentist</h2>
         </div>
 
-        <form>
+        <form action="dentists" method="post">
 
             <div class="form-grid">
 
                 <div>
                     <label>Dentist Name</label>
-                    <input type="text" placeholder="Enter dentist name">
-                </div>
-
-                <div>
-                    <label>Specialization</label>
-                    <select>
-                        <option>Select specialization</option>
-                        <option>General Dentistry</option>
-                        <option>Orthodontics</option>
-                        <option>Endodontics</option>
-                        <option>Periodontics</option>
-                        <option>Paediatric Dentistry</option>
-                    </select>
+                    <input type="text"
+                           name="dentistName"
+                           placeholder="Enter dentist name"
+                           required>
                 </div>
 
                 <div>
                     <label>Contact Number</label>
-                    <input type="tel" placeholder="Enter contact number">
+                    <input type="tel"
+                           name="contactNumber"
+                           placeholder="Enter contact number"
+                           pattern="[0-9]{10}"
+                           maxlength="10"
+                           required>
                 </div>
 
             </div>
@@ -214,7 +218,10 @@
 
         <div class="card-header">
             <h2>Dentist Directory</h2>
-            <input style="width:220px" type="search" placeholder="Search dentist...">
+            <input id="searchDentist"
+                   style="width:220px"
+                   type="search"
+                   placeholder="Search dentist...">
         </div>
 
         <table>
@@ -223,36 +230,17 @@
             <tr>
                 <th>Dentist ID</th>
                 <th>Name</th>
-                <th>Specialization</th>
                 <th>Contact</th>
                 <th>Availability</th>
             </tr>
             </thead>
 
-            <tbody>
+            <tbody id="dentistTableBody">
 
             <tr>
-                <td>D001</td>
-                <td>Dr. Sarah Perera</td>
-                <td>General Dentistry</td>
-                <td>0771234567</td>
-                <td class="available">Available</td>
-            </tr>
-
-            <tr>
-                <td>D002</td>
-                <td>Dr. Michael Silva</td>
-                <td>Orthodontics</td>
-                <td>0772345678</td>
-                <td class="available">Available</td>
-            </tr>
-
-            <tr>
-                <td>D003</td>
-                <td>Dr. Emily Fernando</td>
-                <td>Endodontics</td>
-                <td>0773456789</td>
-                <td class="unavailable">Unavailable</td>
+                <td colspan="4" class="loading">
+                    Loading dentists...
+                </td>
             </tr>
 
             </tbody>
@@ -262,6 +250,97 @@
     </section>
 
 </main>
+
+<script>
+
+    let dentists = [];
+
+    function loadDentists() {
+
+        fetch("dentists")
+            .then(response => {
+
+                if (!response.ok) {
+                    throw new Error("Failed to load dentists.");
+                }
+
+                return response.json();
+            })
+            .then(data => {
+
+                dentists = data;
+
+                displayDentists(dentists);
+            })
+            .catch(error => {
+
+                console.error(error);
+
+                document.getElementById("dentistTableBody").innerHTML = `
+                    <tr>
+                        <td colspan="4" class="error">
+                            Unable to load dentists from the database.
+                        </td>
+                    </tr>
+                `;
+            });
+    }
+
+    function displayDentists(dentistList) {
+
+        const tableBody =
+            document.getElementById("dentistTableBody");
+
+        if (dentistList.length === 0) {
+
+            tableBody.innerHTML = `
+                <tr>
+                    <td colspan="4" class="loading">
+                        No dentists found.
+                    </td>
+                </tr>
+            `;
+
+            return;
+        }
+
+        tableBody.innerHTML = "";
+
+        dentistList.forEach(dentist => {
+
+            const row = document.createElement("tr");
+
+            row.innerHTML = `
+                <td>D${String(dentist.dentistId).padStart(3, "0")}</td>
+                <td>${dentist.dentistName}</td>
+                <td>${dentist.contactNumber || "Not available"}</td>
+                <td class="available">Available</td>
+            `;
+
+            tableBody.appendChild(row);
+        });
+    }
+
+    document
+        .getElementById("searchDentist")
+        .addEventListener("input", function () {
+
+            const searchValue =
+                this.value.toLowerCase().trim();
+
+            const filteredDentists =
+                dentists.filter(dentist =>
+                    dentist.dentistName
+                        .toLowerCase()
+                        .includes(searchValue)
+                );
+
+            displayDentists(filteredDentists);
+        });
+
+    loadDentists();
+
+</script>
 
 </body>
 </html>

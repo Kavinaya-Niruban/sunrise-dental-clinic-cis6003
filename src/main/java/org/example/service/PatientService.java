@@ -3,6 +3,8 @@ package org.example.service;
 import org.example.dao.PatientDAO;
 import org.example.model.Patient;
 
+import java.util.List;
+
 public class PatientService {
 
     private final PatientDAO patientDAO;
@@ -37,5 +39,9 @@ public class PatientService {
         patient.setContactNumber(patient.getContactNumber().trim());
 
         return patientDAO.addPatient(patient);
+    }
+
+    public List<Patient> getAllPatients() {
+        return patientDAO.getAllPatients();
     }
 }
