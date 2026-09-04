@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help | Sunrise Dental Clinic</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #c9f3f5, #e9f8fa, #b9e7f0);
+            color: #16343b;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: #064d60;
+            color: white;
+            padding: 28px 18px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+
+        .brand-icon {
+            font-size: 32px;
+        }
+
+        .brand h2 {
+            font-size: 19px;
+        }
+
+        .brand span {
+            display: block;
+            font-size: 11px;
+            opacity: .7;
+            margin-top: 3px;
+        }
+
+        .menu-title {
+            font-size: 11px;
+            opacity: .6;
+            margin: 20px 12px 10px;
+            letter-spacing: 1px;
+        }
+
+        .nav a {
+            display: block;
+            text-decoration: none;
+            color: white;
+            padding: 12px 14px;
+            border-radius: 10px;
+            margin-bottom: 5px;
+            font-size: 14px;
+            transition: .2s;
+        }
+
+        .nav a:hover,
+        .nav a.active {
+            background: #087f8c;
+        }
+
+        .online {
+            position: absolute;
+            bottom: 25px;
+            left: 25px;
+            font-size: 13px;
+        }
+
+        .online-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #5be39a;
+            border-radius: 50%;
+            margin-right: 7px;
+        }
+
+        .main {
+            margin-left: 250px;
+            padding: 35px;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+        }
+
+        .topbar h1 {
+            color: #064d60;
+            font-size: 28px;
+        }
+
+        .topbar p {
+            color: #45656d;
+            margin-top: 5px;
+        }
+
+        .profile {
+            background: rgba(255,255,255,.75);
+            padding: 10px 18px;
+            border-radius: 14px;
+            box-shadow: 0 5px 20px rgba(0,0,0,.06);
+        }
+
+        .profile strong {
+            display: block;
+        }
+
+        .profile span {
+            font-size: 12px;
+            color: #789097;
+        }
+
+        .intro {
+            background: rgba(255,255,255,.82);
+            border-radius: 18px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(6,77,96,.09);
+        }
+
+        .intro h2 {
+            color: #064d60;
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .intro p {
+            color: #45656d;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .help-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .help-card {
+            background: rgba(255,255,255,.82);
+            border-radius: 18px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(6,77,96,.09);
+            transition: .2s;
+        }
+
+        .help-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .help-number {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #087f8c;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .help-card h3 {
+            color: #064d60;
+            font-size: 17px;
+            margin-bottom: 10px;
+        }
+
+        .help-card p {
+            color: #45656d;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .help-card ol {
+            padding-left: 20px;
+            color: #45656d;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .help-card li {
+            margin-bottom: 3px;
+        }
+
+        .tip {
+            margin-top: 25px;
+            background: #e6f3f5;
+            border-left: 5px solid #087f8c;
+            border-radius: 12px;
+            padding: 18px 20px;
+        }
+
+        .tip strong {
+            color: #064d60;
+        }
+
+        .tip p {
+            color: #45656d;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        @media(max-width: 900px) {
+            .sidebar {
+                width: 210px;
+            }
+
+            .main {
+                margin-left: 210px;
+            }
+
+            .help-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media(max-width: 650px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+
+            .online {
+                position: static;
+                margin-top: 20px;
+            }
+
+            .main {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .topbar {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<aside class="sidebar">
+
+    <div class="brand">
+        <div class="brand-icon">🦷</div>
+        <div>
+            <h2>Sunrise Dental</h2>
+            <span>Clinic Management System</span>
+        </div>
+    </div>
+
+    <div class="menu-title">MAIN MENU</div>
+
+    <nav class="nav">
+        <a href="dashboard.html">▣ Dashboard</a>
+        <a href="patients.html">♙ Patients</a>
+        <a href="appointments.html">▣ Appointments</a>
+        <a href="dentists.html">♙ Dentists</a>
+        <a href="treatments.html">▣ Treatments</a>
+        <a href="billing.html">▣ Billing</a>
+        <a href="reports.html">▤ Reports</a>
+        <a class="active" href="help.html">❓ Help</a>
+        <a href="logout">↪ Logout</a>
+    </nav>
+
+    <div class="online">
+        <span class="online-dot"></span>System Online
+    </div>
+
+</aside>
+
+
+<main class="main">
+
+    <div class="topbar">
+
+        <div>
+            <h1>Help & User Guide</h1>
+            <p>Step-by-step instructions for using the clinic management system.</p>
+        </div>
+
+        <div class="profile">
+            <strong>Admin User</strong>
+            <span>Administrator</span>
+        </div>
+
+    </div>
+
+
+    <section class="intro">
+
+        <h2>Welcome to Sunrise Dental Clinic</h2>
+
+        <p>
+            This guide provides simple instructions for staff members to
+            perform the main tasks in the Sunrise Dental Clinic Management System.
+        </p>
+
+    </section>
+
+
+    <section class="help-grid">
+
+
+        <div class="help-card">
+
+            <div class="help-number">1</div>
+
+            <h3>Login to the System</h3>
+
+            <ol>
+                <li>Open the Sunrise Dental Clinic system.</li>
+                <li>Enter your authorized username.</li>
+                <li>Enter your password.</li>
+                <li>Click the Login button.</li>
+                <li>The dashboard will open after successful authentication.</li>
+            </ol>
+
+        </div>
+
+
+        <div class="help-card">
+
+            <div class="help-number">2</div>
+
+            <h3>Register a New Patient</h3>
+
+            <ol>
+                <li>Open the Patients section.</li>
+                <li>Enter the patient's name.</li>
+                <li>Enter the patient's address.</li>
+                <li>Enter the contact number.</li>
+                <li>Click Register Patient.</li>
+                <li>The patient will be saved in the system.</li>
+            </ol>
+
+        </div>
+
+
+        <div class="help-card">
+
+            <div class="help-number">3</div>
+
+            <h3>Register an Appointment</h3>
+
+            <ol>
+                <li>Open the Appointments section.</li>
+                <li>Enter the appointment number.</li>
+                <li>Enter the patient's information.</li>
+                <li>Select the dentist.</li>
+                <li>Select the required treatment.</li>
+                <li>Select the appointment date and time.</li>
+                <li>Click Register Appointment.</li>
+            </ol>
+
+        </div>
+
+
+        <div class="help-card">
+
+            <div class="help-number">4</div>
+
+            <h3>Find Appointment Details</h3>
+
+            <ol>
+                <li>Open the appointment search section.</li>
+                <li>Enter the appointment number.</li>
+                <li>Click Search.</li>
+                <li>The patient's appointment information will be displayed.</li>
+            </ol>
+
+        </div>
+
+
+        <div class="help-card">
+
+            <div class="help-number">5</div>
+
+            <h3>Calculate & Print Bill</h3>
+
+            <ol>
+                <li>Open the Billing section.</li>
+                <li>Select or enter the treatment.</li>
+                <li>Enter the consultation fee.</li>
+                <li>Check the calculated total.</li>
+                <li>Review the patient's billing information.</li>
+                <li>Click Print Bill to print the receipt.</li>
+            </ol>
+
+        </div>
+
+
+        <div class="help-card">
+
+            <div class="help-number">6</div>
+
+            <h3>Logout / Exit the System</h3>
+
+            <ol>
+                <li>Complete your work before leaving the system.</li>
+                <li>Click Logout from the navigation menu.</li>
+                <li>Your current session will be ended.</li>
+                <li>You will be returned to the login page.</li>
+            </ol>
+
+        </div>
+
+
+    </section>
+
+
+    <div class="tip">
+
+        <strong>💡 Staff Reminder</strong>
+
+        <p>
+            Always check patient and appointment details carefully before
+            saving records. Log out after completing your work to keep
+            patient information secure.
+        </p>
+
+    </div>
+
+
+</main>
+
+</body>
+</html>

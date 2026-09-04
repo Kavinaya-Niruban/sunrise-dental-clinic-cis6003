@@ -8,11 +8,6 @@
 
     <style>
 
-        /* =====================================================
-           SUNRISE DENTAL CLINIC
-           STANDARD COLOUR SYSTEM
-           ===================================================== */
-
         :root {
             --primary-dark: #064d60;
             --primary: #075f70;
@@ -47,11 +42,6 @@
             --radius-small: 12px;
         }
 
-
-        /* =====================================================
-           RESET
-           ===================================================== */
-
         * {
             margin: 0;
             padding: 0;
@@ -84,20 +74,10 @@
                     );
         }
 
-
-        /* =====================================================
-           MAIN LAYOUT
-           ===================================================== */
-
         .app-container {
             display: flex;
             min-height: 100vh;
         }
-
-
-        /* =====================================================
-           SIDEBAR
-           ===================================================== */
 
         .sidebar {
             width: 260px;
@@ -125,11 +105,6 @@
 
             z-index: 100;
         }
-
-
-        /* =====================================================
-           BRAND
-           ===================================================== */
 
         .brand {
             display: flex;
@@ -171,11 +146,6 @@
             font-size: 11px;
             margin-top: 3px;
         }
-
-
-        /* =====================================================
-           NAVIGATION
-           ===================================================== */
 
         .nav-section-title {
             color: rgba(255, 255, 255, 0.45);
@@ -238,11 +208,6 @@
             font-size: 16px;
         }
 
-
-        /* =====================================================
-           SIDEBAR FOOTER
-           ===================================================== */
-
         .sidebar-footer {
             margin-top: auto;
 
@@ -274,11 +239,6 @@
                     0 0 10px rgba(114, 215, 169, 0.7);
         }
 
-
-        /* =====================================================
-           MAIN CONTENT
-           ===================================================== */
-
         .main-content {
             margin-left: 260px;
 
@@ -286,11 +246,6 @@
 
             padding: 30px 36px 40px;
         }
-
-
-        /* =====================================================
-           TOP BAR
-           ===================================================== */
 
         .topbar {
             display: flex;
@@ -314,11 +269,6 @@
 
             font-size: 13px;
         }
-
-
-        /* =====================================================
-           PROFILE
-           ===================================================== */
 
         .profile {
             display: flex;
@@ -376,11 +326,6 @@
             font-size: 10px;
             color: var(--text-light);
         }
-
-
-        /* =====================================================
-           STATISTICS
-           ===================================================== */
 
         .stats-grid {
             display: grid;
@@ -478,11 +423,6 @@
             color: var(--text-light);
         }
 
-
-        /* =====================================================
-           CONTENT GRID
-           ===================================================== */
-
         .content-grid {
             display: grid;
 
@@ -492,11 +432,6 @@
 
             gap: 22px;
         }
-
-
-        /* =====================================================
-           CARDS
-           ===================================================== */
 
         .card {
             background:
@@ -549,11 +484,6 @@
         .view-all:hover {
             text-decoration: underline;
         }
-
-
-        /* =====================================================
-           APPOINTMENTS
-           ===================================================== */
 
         .appointments {
             padding: 0 22px 20px;
@@ -648,11 +578,6 @@
             color: var(--warning);
         }
 
-
-        /* =====================================================
-           QUICK ACTIONS
-           ===================================================== */
-
         .quick-actions {
             padding: 0 22px 22px;
 
@@ -715,11 +640,6 @@
             font-weight: 600;
         }
 
-
-        /* =====================================================
-           REMINDER
-           ===================================================== */
-
         .reminder {
             margin: 0 22px 22px;
 
@@ -758,11 +678,6 @@
             line-height: 1.6;
         }
 
-
-        /* =====================================================
-           RESPONSIVE
-           ===================================================== */
-
         @media (max-width: 1100px) {
 
             .stats-grid {
@@ -774,7 +689,6 @@
                 grid-template-columns: 1fr;
             }
         }
-
 
         @media (max-width: 800px) {
 
@@ -809,7 +723,6 @@
             }
         }
 
-
         @media (max-width: 600px) {
 
             .stats-grid {
@@ -840,15 +753,9 @@
     </style>
 </head>
 
-
 <body>
 
 <div class="app-container">
-
-
-    <!-- =====================================================
-         SIDEBAR
-         ===================================================== -->
 
     <aside class="sidebar">
 
@@ -865,11 +772,9 @@
 
         </div>
 
-
         <div class="nav-section-title">
             Main Menu
         </div>
-
 
         <nav class="nav-menu">
 
@@ -881,7 +786,6 @@
 
             </a>
 
-
             <a href="patients.html"
                class="nav-link">
 
@@ -889,7 +793,6 @@
                 <span>Patients</span>
 
             </a>
-
 
             <a href="appointments.html"
                class="nav-link">
@@ -899,7 +802,6 @@
 
             </a>
 
-
             <a href="dentists.html"
                class="nav-link">
 
@@ -907,7 +809,6 @@
                 <span>Dentists</span>
 
             </a>
-
 
             <a href="treatments.html"
                class="nav-link">
@@ -917,7 +818,6 @@
 
             </a>
 
-
             <a href="billing.html"
                class="nav-link">
 
@@ -925,7 +825,6 @@
                 <span>Billing</span>
 
             </a>
-
 
             <a href="reports.html"
                class="nav-link">
@@ -935,17 +834,23 @@
 
             </a>
 
-
-            <a href="settings.html"
+            <a href="help.html"
                class="nav-link">
 
-                <span class="nav-icon">⚙</span>
-                <span>Settings</span>
+                <span class="nav-icon">❓</span>
+                <span>Help</span>
+
+            </a>
+
+            <a href="logout"
+               class="nav-link">
+
+                <span class="nav-icon">↪</span>
+                <span>Logout</span>
 
             </a>
 
         </nav>
-
 
         <div class="sidebar-footer">
 
@@ -961,16 +866,7 @@
 
     </aside>
 
-
-
-    <!-- =====================================================
-         MAIN CONTENT
-         ===================================================== -->
-
     <main class="main-content">
-
-
-        <!-- TOP BAR -->
 
         <header class="topbar">
 
@@ -983,7 +879,6 @@
                 </p>
 
             </div>
-
 
             <div class="profile">
 
@@ -1003,14 +898,7 @@
 
         </header>
 
-
-
-        <!-- =================================================
-             STATISTICS
-             ================================================= -->
-
         <section class="stats-grid">
-
 
             <div class="stat-card">
 
@@ -1036,8 +924,6 @@
 
             </div>
 
-
-
             <div class="stat-card">
 
                 <div class="stat-top">
@@ -1062,8 +948,6 @@
 
             </div>
 
-
-
             <div class="stat-card">
 
                 <div class="stat-top">
@@ -1087,8 +971,6 @@
                 </div>
 
             </div>
-
-
 
             <div class="stat-card">
 
@@ -1116,18 +998,7 @@
 
         </section>
 
-
-
-        <!-- =================================================
-             MAIN DASHBOARD GRID
-             ================================================= -->
-
         <section class="content-grid">
-
-
-            <!-- =============================================
-                 TODAY'S APPOINTMENTS
-                 ============================================= -->
 
             <div class="card">
 
@@ -1152,9 +1023,7 @@
 
                 </div>
 
-
                 <div class="appointments">
-
 
                     <div class="appointment">
 
@@ -1184,8 +1053,6 @@
 
                     </div>
 
-
-
                     <div class="appointment">
 
                         <div class="appointment-time">
@@ -1213,8 +1080,6 @@
                         </span>
 
                     </div>
-
-
 
                     <div class="appointment">
 
@@ -1244,8 +1109,6 @@
 
                     </div>
 
-
-
                     <div class="appointment">
 
                         <div class="appointment-time">
@@ -1273,8 +1136,6 @@
                         </span>
 
                     </div>
-
-
 
                     <div class="appointment">
 
@@ -1308,16 +1169,7 @@
 
             </div>
 
-
-
-            <!-- =============================================
-                 RIGHT COLUMN
-                 ============================================= -->
-
             <div>
-
-
-                <!-- QUICK ACTIONS -->
 
                 <div class="card">
 
@@ -1337,9 +1189,7 @@
 
                     </div>
 
-
                     <div class="quick-actions">
-
 
                         <a href="patients.html"
                            class="action">
@@ -1354,7 +1204,6 @@
 
                         </a>
 
-
                         <a href="appointments.html"
                            class="action">
 
@@ -1368,7 +1217,6 @@
 
                         </a>
 
-
                         <a href="treatments.html"
                            class="action">
 
@@ -1381,7 +1229,6 @@
                             </span>
 
                         </a>
-
 
                         <a href="billing.html"
                            class="action">
@@ -1399,10 +1246,6 @@
                     </div>
 
                 </div>
-
-
-
-                <!-- SYSTEM REMINDER -->
 
                 <div class="card"
                      style="margin-top: 22px;">
@@ -1423,7 +1266,6 @@
 
                     </div>
 
-
                     <div class="reminder">
 
                         <div class="reminder-title">
@@ -1443,7 +1285,6 @@
                     </div>
 
                 </div>
-
 
             </div>
 

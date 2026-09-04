@@ -263,6 +263,7 @@
 <body>
 
 <aside class="sidebar">
+
     <div class="brand">
         <div class="brand-icon">🦷</div>
         <div>
@@ -281,12 +282,14 @@
         <a href="treatments.html">▣ Treatments</a>
         <a href="billing.html">▣ Billing</a>
         <a href="reports.html">▤ Reports</a>
-        <a href="settings.html">⚙ Settings</a>
+        <a href="help.html">❓ Help</a>
+        <a href="logout">↪ Logout</a>
     </nav>
 
     <div class="online">
         <span class="online-dot"></span>System Online
     </div>
+
 </aside>
 
 <main class="main">
@@ -304,65 +307,96 @@
     </div>
 
     <section class="card">
+
         <div class="card-header">
             <h2>Register New Appointment</h2>
         </div>
 
-        <form>
+        <form action="appointments" method="post">
+
             <div class="form-grid">
 
                 <div>
+                    <label>Appointment Number</label>
+                    <input type="text"
+                           name="appointmentNumber"
+                           placeholder="e.g. APT-001"
+                           required>
+                </div>
+
+                <div>
                     <label>Patient Name</label>
-                    <input type="text" placeholder="Enter patient name" required>
+                    <input type="text"
+                           name="patientName"
+                           placeholder="Enter patient name"
+                           required>
+                </div>
+
+                <div>
+                    <label>Contact Number</label>
+                    <input type="text"
+                           name="contactNumber"
+                           placeholder="Enter contact number"
+                           required>
+                </div>
+
+                <div>
+                    <label>Address</label>
+                    <input type="text"
+                           name="address"
+                           placeholder="Enter patient address"
+                           required>
                 </div>
 
                 <div>
                     <label>Dentist</label>
-                    <select required>
+                    <select name="dentistId" required>
                         <option value="">Select dentist</option>
-                        <option>Dr. Sarah Perera</option>
-                        <option>Dr. Michael Silva</option>
-                        <option>Dr. Emily Fernando</option>
+                        <option value="1">Dr. Sarah Perera</option>
+                        <option value="2">Dr. Michael Silva</option>
+                        <option value="3">Dr. Emily Fernando</option>
                     </select>
                 </div>
 
                 <div>
                     <label>Treatment</label>
-                    <select required>
+                    <select name="treatmentId" required>
                         <option value="">Select treatment</option>
-                        <option>Routine Dental Check-up</option>
-                        <option>Teeth Cleaning</option>
-                        <option>Dental Consultation</option>
-                        <option>Root Canal Treatment</option>
+                        <option value="1">Routine Dental Check-up</option>
+                        <option value="2">Teeth Cleaning</option>
+                        <option value="3">Dental Consultation</option>
+                        <option value="4">Root Canal Treatment</option>
                     </select>
                 </div>
 
                 <div>
                     <label>Appointment Date</label>
-                    <input type="date" required>
+                    <input type="date"
+                           name="appointmentDate"
+                           required>
                 </div>
 
                 <div>
                     <label>Appointment Time</label>
-                    <input type="time" required>
-                </div>
-
-                <div>
-                    <label>Status</label>
-                    <select>
-                        <option>Confirmed</option>
-                        <option>Pending</option>
-                        <option>Cancelled</option>
-                    </select>
+                    <input type="time"
+                           name="appointmentTime"
+                           required>
                 </div>
 
             </div>
 
             <div class="form-actions">
-                <button class="btn" type="submit">+ Register Appointment</button>
-                <button class="btn btn-secondary" type="reset">Clear</button>
+                <button class="btn" type="submit">
+                    + Register Appointment
+                </button>
+
+                <button class="btn btn-secondary" type="reset">
+                    Clear
+                </button>
             </div>
+
         </form>
+
     </section>
 
     <section class="card">
@@ -373,6 +407,7 @@
         </div>
 
         <table>
+
             <thead>
             <tr>
                 <th>Time</th>
@@ -384,12 +419,15 @@
             </thead>
 
             <tbody>
+
             <tr>
                 <td>09:00</td>
                 <td>Amelia Silva</td>
                 <td>Dr. Sarah Perera</td>
                 <td>Routine Dental Check-up</td>
-                <td><span class="status confirmed">Confirmed</span></td>
+                <td>
+                    <span class="status confirmed">Confirmed</span>
+                </td>
             </tr>
 
             <tr>
@@ -397,7 +435,9 @@
                 <td>Ryan James</td>
                 <td>Dr. Michael Silva</td>
                 <td>Teeth Cleaning</td>
-                <td><span class="status confirmed">Confirmed</span></td>
+                <td>
+                    <span class="status confirmed">Confirmed</span>
+                </td>
             </tr>
 
             <tr>
@@ -405,7 +445,9 @@
                 <td>Noah Kumar</td>
                 <td>Dr. Emily Fernando</td>
                 <td>Dental Consultation</td>
-                <td><span class="status pending">Pending</span></td>
+                <td>
+                    <span class="status pending">Pending</span>
+                </td>
             </tr>
 
             <tr>
@@ -413,9 +455,13 @@
                 <td>Emma Martin</td>
                 <td>Dr. Sarah Perera</td>
                 <td>Root Canal Consultation</td>
-                <td><span class="status confirmed">Confirmed</span></td>
+                <td>
+                    <span class="status confirmed">Confirmed</span>
+                </td>
             </tr>
+
             </tbody>
+
         </table>
 
     </section>
@@ -424,4 +470,3 @@
 
 </body>
 </html>
-
