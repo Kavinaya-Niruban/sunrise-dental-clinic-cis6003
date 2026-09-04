@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    ```
+    <title>Sunrise Dental Clinic | Staff Login</title>
+
+    <style>
+
+        /* ================================
+           GLOBAL STYLES
+        ================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            min-height: 100vh;
+
+            background:
+                    radial-gradient(circle at 10% 20%, #c9f3f5 0%, transparent 30%),
+                    radial-gradient(circle at 90% 80%, #b9e7f0 0%, transparent 30%),
+                    linear-gradient(135deg, #e9f8fa, #f7fcfd);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #16343b;
+            overflow: hidden;
+        }
+
+
+        /* ================================
+           BACKGROUND DECORATION
+        ================================= */
+
+        .background-circle {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(2px);
+            opacity: 0.45;
+            z-index: -1;
+        }
+
+        .circle-one {
+            width: 350px;
+            height: 350px;
+            background: #8bd8df;
+            top: -150px;
+            left: -120px;
+        }
+
+        .circle-two {
+            width: 300px;
+            height: 300px;
+            background: #66c5d2;
+            bottom: -120px;
+            right: -100px;
+        }
+
+
+        /* ================================
+           MAIN CONTAINER
+        ================================= */
+
+        .login-wrapper {
+            width: 920px;
+            max-width: 92%;
+            min-height: 560px;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            background: rgba(255, 255, 255, 0.75);
+
+            border: 1px solid rgba(255, 255, 255, 0.8);
+
+            border-radius: 28px;
+
+            box-shadow:
+                    0 25px 70px rgba(21, 83, 95, 0.18);
+
+            backdrop-filter: blur(20px);
+
+            overflow: hidden;
+
+            animation: appear 0.8s ease;
+        }
+
+
+        /* ================================
+           LEFT BRANDING PANEL
+        ================================= */
+
+        .branding {
+            background:
+                    linear-gradient(
+                            145deg,
+                            #087f8c,
+                            #075f70 55%,
+                            #064d60
+                    );
+
+            color: white;
+
+            padding: 55px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        .branding::before {
+            content: "";
+            position: absolute;
+
+            width: 280px;
+            height: 280px;
+
+            border-radius: 50%;
+
+            background: rgba(255, 255, 255, 0.08);
+
+            top: -100px;
+            right: -100px;
+        }
+
+        .branding::after {
+            content: "";
+            position: absolute;
+
+            width: 200px;
+            height: 200px;
+
+            border-radius: 50%;
+
+            background: rgba(255, 255, 255, 0.06);
+
+            bottom: -100px;
+            left: -70px;
+        }
+
+
+        /* ================================
+           LOGO
+        ================================= */
+
+        .logo {
+            width: 78px;
+            height: 78px;
+
+            background: rgba(255, 255, 255, 0.15);
+
+            border: 1px solid rgba(255, 255, 255, 0.25);
+
+            border-radius: 22px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 40px;
+
+            margin-bottom: 28px;
+
+            box-shadow:
+                    0 10px 30px rgba(0, 0, 0, 0.12);
+        }
+
+
+        .branding h1 {
+            font-size: 38px;
+            line-height: 1.15;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+        }
+
+        .branding h1 span {
+            color: #8ee9ef;
+        }
+
+        .branding p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.78);
+            max-width: 340px;
+        }
+
+
+        /* ================================
+           FEATURES
+        ================================= */
+
+        .features {
+            margin-top: 35px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+
+            margin-bottom: 15px;
+
+            font-size: 14px;
+
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .feature-icon {
+            width: 30px;
+            height: 30px;
+
+            border-radius: 50%;
+
+            background: rgba(142, 233, 239, 0.18);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-right: 12px;
+
+            color: #8ee9ef;
+        }
+
+
+        /* ================================
+           LOGIN PANEL
+        ================================= */
+
+        .login-panel {
+            padding: 60px 55px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .login-heading {
+            margin-bottom: 35px;
+        }
+
+        .login-heading h2 {
+            font-size: 30px;
+            color: #16343b;
+            margin-bottom: 8px;
+        }
+
+        .login-heading p {
+            color: #789097;
+            font-size: 14px;
+        }
+
+
+        /* ================================
+           FORM
+        ================================= */
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        label {
+            display: block;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            color: #35545c;
+
+            margin-bottom: 9px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+
+            left: 15px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            font-size: 17px;
+
+            color: #6ba9b3;
+        }
+
+        input {
+            width: 100%;
+
+            padding: 14px 45px;
+
+            border: 1.5px solid #d5e4e7;
+
+            border-radius: 11px;
+
+            font-size: 14px;
+
+            color: #16343b;
+
+            background: #f9fcfc;
+
+            outline: none;
+
+            transition: 0.25s ease;
+        }
+
+        input::placeholder {
+            color: #a4b6ba;
+        }
+
+        input:focus {
+            border-color: #0795a4;
+
+            background: white;
+
+            box-shadow:
+                    0 0 0 4px rgba(7, 149, 164, 0.08);
+        }
+
+
+        /* ================================
+           PASSWORD TOGGLE
+        ================================= */
+
+        .toggle-password {
+            position: absolute;
+
+            right: 15px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: none;
+            background: transparent;
+
+            cursor: pointer;
+
+            font-size: 16px;
+
+            color: #71949b;
+        }
+
+        .toggle-password:hover {
+            color: #087f8c;
+        }
+
+
+        /* ================================
+           LOGIN BUTTON
+        ================================= */
+
+        .login-button {
+            width: 100%;
+
+            padding: 15px;
+
+            margin-top: 5px;
+
+            border: none;
+            border-radius: 11px;
+
+            background:
+                    linear-gradient(
+                            135deg,
+                            #078a99,
+                            #066b7a
+                    );
+
+            color: white;
+
+            font-size: 15px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            box-shadow:
+                    0 10px 20px rgba(7, 138, 153, 0.22);
+
+            transition: 0.25s ease;
+        }
+
+        .login-button:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                    0 14px 25px rgba(7, 138, 153, 0.3);
+        }
+
+        .login-button:active {
+            transform: translateY(0);
+        }
+
+
+        /* ================================
+           ERROR MESSAGE
+        ================================= */
+
+        .error-message {
+            display: none;
+
+            background: #fff0ef;
+
+            border: 1px solid #ffd3cf;
+
+            color: #c0392b;
+
+            padding: 11px 13px;
+
+            border-radius: 9px;
+
+            font-size: 13px;
+
+            margin-bottom: 18px;
+
+            text-align: center;
+        }
+
+
+        /* ================================
+           SECURITY NOTE
+        ================================= */
+
+        .security-note {
+            text-align: center;
+
+            margin-top: 24px;
+
+            font-size: 12px;
+
+            color: #91a3a7;
+        }
+
+
+        /* ================================
+           ANIMATION
+        ================================= */
+
+        @keyframes appear {
+
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+
+        /* ================================
+           RESPONSIVE DESIGN
+        ================================= */
+
+        @media (max-width: 750px) {
+
+            .login-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .branding {
+                display: none;
+            }
+
+            .login-panel {
+                padding: 45px 30px;
+            }
+
+        }
+
+    </style>
+    ```
+
+</head>
+
+<body>
+
+<!-- Decorative Background -->
+
+<div class="background-circle circle-one"></div>
+<div class="background-circle circle-two"></div>
+
+<div class="login-wrapper">
+
+    ```
+    <!-- ==============================
+         BRANDING
+    =============================== -->
+
+    <section class="branding">
+
+        <div class="logo">
+            🦷
+        </div>
+
+        <h1>
+            Sunrise<br>
+            <span>Dental Clinic</span>
+        </h1>
+
+        <p>
+            A smarter way to manage appointments,
+            patients and dental care.
+        </p>
+
+
+        <div class="features">
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    ✓
+                </div>
+
+                Secure staff access
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    ✓
+                </div>
+
+                Efficient appointment management
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    ✓
+                </div>
+
+                Integrated billing & payments
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==============================
+         LOGIN
+    =============================== -->
+
+    <section class="login-panel">
+
+
+        <div class="login-heading">
+
+            <h2>
+                Welcome back
+            </h2>
+
+            <p>
+                Sign in to access the clinic management system.
+            </p>
+
+        </div>
+
+
+        <!-- Error -->
+
+        <div
+                id="errorMessage"
+                class="error-message">
+        </div>
+
+
+        <!-- Login Form -->
+
+        <form
+                action="login"
+                method="post">
+
+
+            <!-- Username -->
+
+            <div class="form-group">
+
+                <label for="username">
+                    Username
+                </label>
+
+                <div class="input-wrapper">
+
+                <span class="input-icon">
+                    👤
+                </span>
+
+                    <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            placeholder="Enter your username"
+                            autocomplete="username"
+                            required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- Password -->
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <div class="input-wrapper">
+
+                <span class="input-icon">
+                    🔒
+                </span>
+
+                    <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                    >
+
+                    <button
+                            type="button"
+                            class="toggle-password"
+                            onclick="togglePassword()">
+
+                        👁
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Login -->
+
+            <button
+                    type="submit"
+                    class="login-button">
+
+                Sign In →
+
+            </button>
+
+
+        </form>
+
+
+        <div class="security-note">
+            🔐 Authorised staff access only
+        </div>
+
+
+    </section>
+    ```
+
+</div>
+
+<script>
+
+    /* ==============================
+       SHOW / HIDE PASSWORD
+    =============================== */
+
+    function togglePassword() {
+
+        const password =
+            document.getElementById("password");
+
+        const button =
+            document.querySelector(".toggle-password");
+
+        if (password.type === "password") {
+
+            password.type = "text";
+
+            button.textContent = "🙈";
+
+        } else {
+
+            password.type = "password";
+
+            button.textContent = "👁";
+
+        }
+
+    }
+
+
+    /* ==============================
+       DISPLAY LOGIN ERROR
+    =============================== */
+
+    const params =
+        new URLSearchParams(window.location.search);
+
+    if (params.get("error") === "invalid") {
+
+        const errorMessage =
+            document.getElementById("errorMessage");
+
+        errorMessage.textContent =
+            "Invalid username or password. Please try again.";
+
+        errorMessage.style.display = "block";
+
+    }
+
+</script>
+
+</body>
+
+</html>
