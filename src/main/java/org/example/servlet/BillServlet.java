@@ -19,6 +19,7 @@ public class BillServlet extends HttpServlet {
     private final BillService billService =
             new BillService();
 
+
     @Override
     protected void doGet(
             HttpServletRequest request,
@@ -28,21 +29,11 @@ public class BillServlet extends HttpServlet {
         try {
 
             String appointmentNumber =
-                    request.getParameter(
-                            "appointmentNumber"
-                    );
+                    request.getParameter("appointmentNumber");
 
-            response.setContentType(
-                    "application/json"
-            );
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
 
-            response.setCharacterEncoding(
-                    "UTF-8"
-            );
-
-            /*
-             * LOAD ONE APPOINTMENT
-             */
 
             if (appointmentNumber != null &&
                     !appointmentNumber.trim().isEmpty()) {
@@ -73,18 +64,14 @@ public class BillServlet extends HttpServlet {
             }
 
 
-            /*
-             * LOAD ALL BILL RECORDS
-             */
-
             List<Bill> bills =
                     billService.getAllBills();
 
+
             response.getWriter().print("[");
 
-            for (int i = 0;
-                 i < bills.size();
-                 i++) {
+
+            for (int i = 0; i < bills.size(); i++) {
 
                 Bill bill = bills.get(i);
 
@@ -96,6 +83,7 @@ public class BillServlet extends HttpServlet {
                     response.getWriter().print(",");
                 }
             }
+
 
             response.getWriter().print("]");
 
@@ -121,6 +109,10 @@ public class BillServlet extends HttpServlet {
             HttpServletResponse response)
             throws ServletException, IOException {
 
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
+
         try {
 
             String appointmentNumber =
@@ -128,19 +120,72 @@ public class BillServlet extends HttpServlet {
                             "appointmentNumber"
                     );
 
+
+            String treatmentCostParameter =
+                    request.getParameter(
+                            "treatmentCost"
+                    );
+
+
+            String consultationFeeParameter =
+                    request.getParameter(
+                            "consultationFee"
+                    );
+
+
+            if (appointmentNumber == null ||
+                    appointmentNumber.trim().isEmpty()) {
+
+                throw new IllegalArgumentException(
+                        "Appointment number is required."
+                );
+            }
+
+
+            if (treatmentCostParameter == null ||
+                    treatmentCostParameter.trim().isEmpty()) {
+
+                throw new IllegalArgumentException(
+                        "Treatment cost is required."
+                );
+            }
+
+
+            if (consultationFeeParameter == null ||
+                    consultationFeeParameter.trim().isEmpty()) {
+
+                throw new IllegalArgumentException(
+                        "Consultation fee is required."
+                );
+            }
+
+
             double treatmentCost =
                     Double.parseDouble(
-                            request.getParameter(
-                                    "treatmentCost"
-                            )
+                            treatmentCostParameter
                     );
+
 
             double consultationFee =
                     Double.parseDouble(
-                            request.getParameter(
-                                    "consultationFee"
-                            )
+                            consultationFeeParameter
                     );
+
+
+            if (treatmentCost < 0) {
+
+                throw new IllegalArgumentException(
+                        "Treatment cost cannot be negative."
+                );
+            }
+
+
+            if (consultationFee < 0) {
+
+                throw new IllegalArgumentException(
+                        "Consultation fee cannot be negative."
+                );
+            }
 
 
             boolean success =
@@ -149,15 +194,6 @@ public class BillServlet extends HttpServlet {
                             treatmentCost,
                             consultationFee
                     );
-
-
-            response.setContentType(
-                    "application/json"
-            );
-
-            response.setCharacterEncoding(
-                    "UTF-8"
-            );
 
 
             if (success) {
@@ -177,7 +213,7 @@ public class BillServlet extends HttpServlet {
                 );
 
                 response.getWriter().print(
-                        "{\"success\":false,\"error\":\"Invalid appointment or billing information.\"}"
+                        "{\"success\":false,\"error\":\"Unable to create bill.\"}"
                 );
             }
 
@@ -190,8 +226,27 @@ public class BillServlet extends HttpServlet {
                     HttpServletResponse.SC_BAD_REQUEST
             );
 
+            String errorMessage =
+                    e.getMessage();
+
+            if (errorMessage == null ||
+                    errorMessage.isEmpty()) {
+
+                errorMessage =
+                        "Invalid billing information.";
+            }
+
+
+            errorMessage =
+                    errorMessage
+                            .replace("\\", "\\\\")
+                            .replace("\"", "\\\"");
+
+
             response.getWriter().print(
-                    "{\"success\":false,\"error\":\"Invalid billing information.\"}"
+                    "{\"success\":false,\"error\":\""
+                            + errorMessage
+                            + "\"}"
             );
         }
     }
@@ -201,7 +256,6 @@ public class BillServlet extends HttpServlet {
             Appointment appointment) {
 
         return "{"
-
                 + "\"appointmentId\":"
                 + appointment.getAppointmentId()
 
@@ -222,7 +276,6 @@ public class BillServlet extends HttpServlet {
                 appointment.getTreatmentName()
         )
                 + "\""
-
                 + "}";
     }
 
@@ -230,7 +283,6 @@ public class BillServlet extends HttpServlet {
     private String billToJson(Bill bill) {
 
         return "{"
-
                 + "\"billId\":"
                 + bill.getBillId()
 

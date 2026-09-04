@@ -49,9 +49,13 @@ public class BillDAO {
 
         } catch (Exception e) {
 
-            e.printStackTrace();
-
-            return false;
+            // IMPORTANT:
+            // Show the actual database error
+            throw new RuntimeException(
+                    "Bill database insertion failed: "
+                            + e.getMessage(),
+                    e
+            );
         }
     }
 
@@ -71,16 +75,12 @@ public class BillDAO {
                     b.consultation_fee,
                     b.total_amount
                 FROM bill b
-
                 INNER JOIN appointments a
                     ON b.appointment_id = a.appointment_id
-
                 INNER JOIN dentists d
                     ON a.dentist_id = d.dentist_id
-
                 INNER JOIN treatments t
                     ON a.treatment_id = t.treatment_id
-
                 ORDER BY b.bill_id DESC
                 """;
 
@@ -93,34 +93,14 @@ public class BillDAO {
             while (resultSet.next()) {
 
                 Bill bill = new Bill(
-
                         resultSet.getInt("bill_id"),
-
                         resultSet.getInt("appointment_id"),
-
-                        resultSet.getString(
-                                "appointment_number"
-                        ),
-
-                        resultSet.getString(
-                                "dentist_name"
-                        ),
-
-                        resultSet.getString(
-                                "treatment_name"
-                        ),
-
-                        resultSet.getDouble(
-                                "treatment_cost"
-                        ),
-
-                        resultSet.getDouble(
-                                "consultation_fee"
-                        ),
-
-                        resultSet.getDouble(
-                                "total_amount"
-                        )
+                        resultSet.getString("appointment_number"),
+                        resultSet.getString("dentist_name"),
+                        resultSet.getString("treatment_name"),
+                        resultSet.getDouble("treatment_cost"),
+                        resultSet.getDouble("consultation_fee"),
+                        resultSet.getDouble("total_amount")
                 );
 
                 bills.add(bill);

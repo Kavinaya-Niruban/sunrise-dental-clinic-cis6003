@@ -12,374 +12,378 @@
 
     <style>
 
-        *{
-            box-sizing:border-box;
-            margin:0;
-            padding:0
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
-        body{
-            font-family:"Segoe UI",Arial,sans-serif;
-            background:linear-gradient(
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(
                     135deg,
                     #c9f3f5,
                     #e9f8fa,
                     #b9e7f0
             );
-            color:#16343b;
-            min-height:100vh
+            color: #16343b;
+            min-height: 100vh;
         }
 
-        .sidebar{
-            position:fixed;
-            left:0;
-            top:0;
-            width:250px;
-            height:100vh;
-            background:#064d60;
-            color:white;
-            padding:28px 18px
+        /* SIDEBAR */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: #064d60;
+            color: white;
+            padding: 28px 18px;
         }
 
-        .brand{
-            display:flex;
-            align-items:center;
-            gap:12px;
-            margin-bottom:40px
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 40px;
         }
 
-        .brand-icon{
-            font-size:32px
+        .brand-icon {
+            font-size: 32px;
         }
 
-        .brand h2{
-            font-size:19px
+        .brand h2 {
+            font-size: 19px;
         }
 
-        .brand span{
-            display:block;
-            font-size:11px;
-            opacity:.7;
-            margin-top:3px
+        .brand span {
+            display: block;
+            font-size: 11px;
+            opacity: .7;
+            margin-top: 3px;
         }
 
-        .menu-title{
-            font-size:11px;
-            opacity:.6;
-            margin:20px 12px 10px;
-            letter-spacing:1px
+        .menu-title {
+            font-size: 11px;
+            opacity: .6;
+            margin: 20px 12px 10px;
+            letter-spacing: 1px;
         }
 
-        .nav a{
-            display:block;
-            text-decoration:none;
-            color:white;
-            padding:12px 14px;
-            border-radius:10px;
-            margin-bottom:5px;
-            font-size:14px
+        .nav {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .nav a {
+            display: block;
+            text-decoration: none;
+            color: white;
+            padding: 12px 14px;
+            border-radius: 10px;
+            font-size: 14px;
         }
 
         .nav a:hover,
-        .nav a.active{
-            background:#087f8c
+        .nav a.active {
+            background: #087f8c;
         }
 
-        .online{
-            position:absolute;
-            bottom:25px;
-            left:25px;
-            font-size:13px
+        .online {
+            position: absolute;
+            bottom: 25px;
+            left: 25px;
+            font-size: 13px;
         }
 
-        .online-dot{
-            display:inline-block;
-            width:8px;
-            height:8px;
-            background:#5be39a;
-            border-radius:50%;
-            margin-right:7px
+        .online-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #5be39a;
+            border-radius: 50%;
+            margin-right: 7px;
         }
 
-        .main{
-            margin-left:250px;
-            padding:35px
+        /* MAIN */
+
+        .main {
+            margin-left: 250px;
+            padding: 35px;
         }
 
-        .topbar{
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            margin-bottom:28px
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
         }
 
-        .topbar h1{
-            color:#064d60;
-            font-size:28px
+        .topbar h1 {
+            color: #064d60;
+            font-size: 28px;
         }
 
-        .topbar p{
-            color:#45656d;
-            margin-top:5px
+        .topbar p {
+            color: #45656d;
+            margin-top: 5px;
         }
 
-        .profile{
-            background:rgba(255,255,255,.75);
-            padding:10px 18px;
-            border-radius:14px;
-            box-shadow:0 5px 20px rgba(0,0,0,.06)
+        .profile {
+            background: rgba(255,255,255,.75);
+            padding: 10px 18px;
+            border-radius: 14px;
+            box-shadow: 0 5px 20px rgba(0,0,0,.06);
         }
 
-        .profile strong{
-            display:block
+        .profile strong {
+            display: block;
         }
 
-        .profile span{
-            font-size:12px;
-            color:#789097
+        .profile span {
+            font-size: 12px;
+            color: #789097;
         }
 
-        .card{
-            background:rgba(255,255,255,.9);
-            border-radius:18px;
-            padding:25px;
-            margin-bottom:25px;
-            box-shadow:0 10px 30px rgba(6,77,96,.09)
+        /* CARD */
+
+        .card {
+            background: rgba(255,255,255,.92);
+            border-radius: 18px;
+            padding: 28px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(6,77,96,.09);
         }
 
-        .invoice{
-            max-width:850px;
-            margin:auto
+        .invoice {
+            max-width: 850px;
+            margin: auto;
         }
 
-        .invoice-title{
-            text-align:center;
-            color:#064d60;
-            margin-bottom:25px
+        .invoice-title {
+            text-align: center;
+            color: #064d60;
+            margin-bottom: 28px;
         }
 
-        .invoice-title h2{
-            font-size:23px
+        .invoice-title h2 {
+            font-size: 23px;
         }
 
-        .invoice-title p{
-            margin-top:5px;
-            color:#789097;
-            font-size:13px
+        .invoice-title p {
+            margin-top: 5px;
+            color: #789097;
+            font-size: 13px;
         }
 
-        .form-grid{
-            display:grid;
-            grid-template-columns:repeat(2,1fr);
-            gap:18px
+        /* FORM */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
         }
 
-        label{
-            display:block;
-            font-size:13px;
-            font-weight:600;
-            margin-bottom:7px
+        .full-width {
+            grid-column: 1 / -1;
         }
 
-        input{
-            width:100%;
-            padding:12px;
-            border:1px solid #c9dfe2;
-            border-radius:9px;
-            background:white;
-            outline:none;
-            font-size:14px
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 7px;
         }
 
-        input:focus{
-            border-color:#087f8c
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #c9dfe2;
+            border-radius: 9px;
+            background: white;
+            outline: none;
+            font-size: 14px;
         }
 
-        .readonly-box{
-            width:100%;
-            padding:12px;
-            border:1px solid #c9dfe2;
-            border-radius:9px;
-            background:#f5fbfc;
-            color:#45656d;
-            min-height:43px
+        input:focus {
+            border-color: #087f8c;
         }
 
-        .invoice-line{
-            display:flex;
-            justify-content:space-between;
-            padding:14px 0;
-            border-bottom:1px solid #e5eeee
+        .readonly-box {
+            width: 100%;
+            min-height: 43px;
+            padding: 12px;
+            border: 1px solid #c9dfe2;
+            border-radius: 9px;
+            background: #f5fbfc;
+            color: #45656d;
         }
 
-        .total{
-            display:flex;
-            justify-content:space-between;
-            font-size:20px;
-            font-weight:700;
-            color:#064d60;
-            padding-top:20px
+        /* BUTTONS */
+
+        .actions {
+            margin-top: 30px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
         }
 
-        .actions{
-            margin-top:25px;
-            display:flex;
-            justify-content:flex-end;
-            gap:10px
+        .btn {
+            border: none;
+            background: #075f70;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
         }
 
-        .btn{
-            border:none;
-            background:#075f70;
-            color:white;
-            padding:12px 20px;
-            border-radius:9px;
-            cursor:pointer;
-            font-weight:600
+        .btn:hover {
+            background: #087f8c;
         }
 
-        .btn:hover{
-            background:#087f8c
+        .secondary {
+            background: #e6f3f5;
+            color: #075f70;
         }
 
-        .secondary{
-            background:#e6f3f5;
-            color:#075f70
+        .secondary:hover {
+            background: #d5edef;
         }
 
-        .secondary:hover{
-            background:#d5edef
+        .print {
+            background: #087f8c;
         }
 
-        .message{
-            display:none;
-            padding:12px 15px;
-            margin-bottom:20px;
-            border-radius:9px;
-            font-size:13px;
-            font-weight:600;
-            background:#e8f7ef;
-            color:#2e9b73
+        .print:hover {
+            background: #056875;
         }
 
-        .message.error{
-            background:#fdeaea;
-            color:#c94b4b
+        /* TOTAL */
+
+        .bill-summary {
+            margin-top: 30px;
+            border-top: 1px solid #e5eeee;
+            padding-top: 8px;
         }
 
-        .records-card{
-            overflow-x:auto
+        .invoice-line {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid #e5eeee;
         }
 
-        table{
-            width:100%;
-            border-collapse:collapse;
-            margin-top:15px
+        .total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 21px;
+            font-weight: 700;
+            color: #064d60;
+            padding-top: 20px;
         }
 
-        th{
-            text-align:left;
-            padding:13px;
-            background:#064d60;
-            color:white;
-            font-size:12px
+        /* MESSAGE */
+
+        .message {
+            display: none;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border-radius: 9px;
+            font-size: 13px;
+            font-weight: 600;
+            background: #e8f7ef;
+            color: #2e9b73;
         }
 
-        td{
-            padding:13px;
-            border-bottom:1px solid #e5eeee;
-            font-size:12px
+        .message.error {
+            background: #fdeaea;
+            color: #c94b4b;
         }
 
-        tr:hover{
-            background:#f7fcfd
+        /* PRINT AREA */
+
+        #printBill {
+            display: none;
         }
 
-        .print-btn{
-            border:none;
-            background:#e6f3f5;
-            color:#075f70;
-            padding:7px 12px;
-            border-radius:7px;
-            cursor:pointer;
-            font-weight:600
-        }
+        @media print {
 
-        .print-btn:hover{
-            background:#d5edef
-        }
-
-        #printBill{
-            display:none
-        }
-
-        @media(max-width:900px){
-
-            .sidebar{
-                width:210px
-            }
-
-            .main{
-                margin-left:210px
-            }
-
-            .form-grid{
-                grid-template-columns:1fr
-            }
-        }
-
-        @media(max-width:650px){
-
-            .sidebar{
-                width:76px;
-                padding:20px 10px
-            }
-
-            .brand h2,
-            .brand span,
-            .menu-title,
-            .online{
-                display:none
-            }
-
-            .brand{
-                justify-content:center
-            }
-
-            .nav a{
-                text-align:center
-            }
-
-            .main{
-                margin-left:76px;
-                padding:20px
-            }
-
-            .profile{
-                display:none
-            }
-        }
-
-        @media print{
-
-            body{
-                background:white
+            body {
+                background: white;
             }
 
             .sidebar,
             .topbar,
             .card,
-            .message{
-                display:none !important
+            .message {
+                display: none !important;
             }
 
-            .main{
-                margin:0;
-                padding:0
+            .main {
+                margin: 0;
+                padding: 0;
             }
 
-            #printBill{
-                display:block !important
+            #printBill {
+                display: block !important;
+            }
+        }
+
+        /* MOBILE */
+
+        @media(max-width: 900px) {
+
+            .sidebar {
+                width: 210px;
+            }
+
+            .main {
+                margin-left: 210px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: auto;
+            }
+        }
+
+        @media(max-width: 650px) {
+
+            .sidebar {
+                width: 76px;
+                padding: 20px 10px;
+            }
+
+            .brand h2,
+            .brand span,
+            .menu-title,
+            .online {
+                display: none;
+            }
+
+            .brand {
+                justify-content: center;
+            }
+
+            .nav a {
+                text-align: center;
+            }
+
+            .main {
+                margin-left: 76px;
+                padding: 20px;
+            }
+
+            .profile {
+                display: none;
             }
         }
 
@@ -390,6 +394,8 @@
 
 <body>
 
+
+<!-- SIDEBAR -->
 
 <aside class="sidebar">
 
@@ -455,12 +461,15 @@
     <div class="online">
 
         <span class="online-dot"></span>
+
         System Online
 
     </div>
 
 </aside>
 
+
+<!-- MAIN -->
 
 <main class="main">
 
@@ -500,6 +509,8 @@
     </div>
 
 
+    <!-- BILL FORM -->
+
     <section class="card">
 
         <div class="invoice">
@@ -518,241 +529,209 @@
             </div>
 
 
-            <form id="billForm">
+            <div class="form-grid">
 
 
-                <div class="form-grid">
+                <!-- APPOINTMENT NUMBER -->
 
+                <div>
 
-                    <div>
+                    <label>
+                        Appointment Number
+                    </label>
 
-                        <label>
-                            Appointment Number
-                        </label>
-
-                        <input
-                                type="text"
-                                id="appointmentNumber"
-                                placeholder="Enter appointment number"
-                                required
-                        >
-
-                    </div>
-
-
-                    <div style="
-                        display:flex;
-                        align-items:flex-end;
-                    ">
-
-                        <button
-                                class="btn"
-                                type="button"
-                                onclick="loadAppointment()"
-                                style="width:100%;">
-
-                            Load Appointment
-
-                        </button>
-
-                    </div>
-
-
-                    <div>
-
-                        <label>
-                            Dentist
-                        </label>
-
-                        <div
-                                id="dentistName"
-                                class="readonly-box">
-
-                            Enter an appointment number.
-
-                        </div>
-
-                    </div>
-
-
-                    <div>
-
-                        <label>
-                            Treatment
-                        </label>
-
-                        <div
-                                id="treatmentName"
-                                class="readonly-box">
-
-                            Enter an appointment number.
-
-                        </div>
-
-                    </div>
-
-
-                    <div>
-
-                        <label>
-                            Treatment Cost
-                        </label>
-
-                        <input
-                                type="number"
-                                id="treatmentCost"
-                                min="0"
-                                step="0.01"
-                                placeholder="Enter treatment cost"
-                                required
-                        >
-
-                    </div>
-
-
-                    <div>
-
-                        <label>
-                            Consultation Fee
-                        </label>
-
-                        <input
-                                type="number"
-                                id="consultationFee"
-                                min="0"
-                                step="0.01"
-                                placeholder="Enter consultation fee"
-                                required
-                        >
-
-                    </div>
-
+                    <input
+                            type="text"
+                            id="appointmentNumber"
+                            placeholder="Enter appointment number"
+                    >
 
                 </div>
 
 
-                <div style="margin-top:30px">
+                <!-- LOAD -->
 
-
-                    <div class="invoice-line">
-
-                        <span>
-                            Treatment Cost
-                        </span>
-
-                        <strong id="displayTreatment">
-                            LKR 0.00
-                        </strong>
-
-                    </div>
-
-
-                    <div class="invoice-line">
-
-                        <span>
-                            Consultation Fee
-                        </span>
-
-                        <strong id="displayConsultation">
-                            LKR 0.00
-                        </strong>
-
-                    </div>
-
-
-                    <div class="total">
-
-                        <span>
-                            Total
-                        </span>
-
-                        <span id="displayTotal">
-                            LKR 0.00
-                        </span>
-
-                    </div>
-
-
-                </div>
-
-
-                <div class="actions">
-
-
-                    <button
-                            class="btn secondary"
-                            type="button"
-                            onclick="clearForm()">
-
-                        Clear
-
-                    </button>
-
+                <div style="
+                    display:flex;
+                    align-items:flex-end;
+                ">
 
                     <button
                             class="btn"
-                            type="submit">
+                            type="button"
+                            onclick="loadAppointment()"
+                            style="width:100%;">
 
-                        Generate Bill
+                        Load Appointment
 
                     </button>
-
 
                 </div>
 
 
-            </form>
+                <!-- DENTIST -->
+
+                <div>
+
+                    <label>
+                        Dentist
+                    </label>
+
+                    <div
+                            id="dentistName"
+                            class="readonly-box">
+
+                        Enter an appointment number.
+
+                    </div>
+
+                </div>
+
+
+                <!-- TREATMENT -->
+
+                <div>
+
+                    <label>
+                        Treatment
+                    </label>
+
+                    <div
+                            id="treatmentName"
+                            class="readonly-box">
+
+                        Enter an appointment number.
+
+                    </div>
+
+                </div>
+
+
+                <!-- TREATMENT COST -->
+
+                <div>
+
+                    <label>
+                        Treatment Cost
+                    </label>
+
+                    <input
+                            type="number"
+                            id="treatmentCost"
+                            min="0"
+                            step="0.01"
+                            placeholder="Enter treatment cost"
+                    >
+
+                </div>
+
+
+                <!-- CONSULTATION -->
+
+                <div>
+
+                    <label>
+                        Consultation Fee
+                    </label>
+
+                    <input
+                            type="number"
+                            id="consultationFee"
+                            min="0"
+                            step="0.01"
+                            placeholder="Enter consultation fee"
+                    >
+
+                </div>
+
+
+            </div>
+
+
+            <!-- BILL SUMMARY -->
+
+            <div class="bill-summary">
+
+
+                <div class="invoice-line">
+
+                    <span>
+                        Treatment Cost
+                    </span>
+
+                    <strong id="displayTreatment">
+                        LKR 0.00
+                    </strong>
+
+                </div>
+
+
+                <div class="invoice-line">
+
+                    <span>
+                        Consultation Fee
+                    </span>
+
+                    <strong id="displayConsultation">
+                        LKR 0.00
+                    </strong>
+
+                </div>
+
+
+                <div class="total">
+
+                    <span>
+                        Total
+                    </span>
+
+                    <span id="displayTotal">
+                        LKR 0.00
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- ACTIONS -->
+
+            <div class="actions">
+
+
+                <button
+                        class="btn secondary"
+                        type="button"
+                        onclick="clearForm()">
+
+                    Clear
+
+                </button>
+
+
+                <button
+                        class="btn print"
+                        type="button"
+                        onclick="printBill()">
+
+                    🖨 Print Bill
+
+                </button>
+
+
+            </div>
+
 
         </div>
 
     </section>
 
 
-    <section class="card records-card">
-
-        <div class="invoice-title">
-
-            <h2>
-                Bill Records
-            </h2>
-
-            <p>
-                Previously generated bills
-            </p>
-
-        </div>
-
-
-        <table>
-
-            <thead>
-
-            <tr>
-
-                <th>Bill ID</th>
-                <th>Appointment No.</th>
-                <th>Dentist</th>
-                <th>Treatment</th>
-                <th>Treatment Cost</th>
-                <th>Consultation Fee</th>
-                <th>Total</th>
-                <th>Action</th>
-
-            </tr>
-
-            </thead>
-
-
-            <tbody id="billTableBody">
-
-            </tbody>
-
-        </table>
-
-    </section>
-
+    <!-- PRINT RECEIPT -->
 
     <section id="printBill">
+
 
         <div style="
             max-width:700px;
@@ -760,6 +739,7 @@
             font-family:Arial,sans-serif;
             color:#222;
         ">
+
 
             <div style="
                 text-align:center;
@@ -779,22 +759,19 @@
             </div>
 
 
-            <p>
-                <strong>Bill ID:</strong>
-                <span id="printBillId"></span>
-            </p>
-
-            <p>
+            <p style="margin:10px 0;">
                 <strong>Appointment Number:</strong>
                 <span id="printAppointment"></span>
             </p>
 
-            <p>
+
+            <p style="margin:10px 0;">
                 <strong>Dentist:</strong>
                 <span id="printDentist"></span>
             </p>
 
-            <p>
+
+            <p style="margin:10px 0;">
                 <strong>Treatment:</strong>
                 <span id="printTreatment"></span>
             </p>
@@ -808,17 +785,20 @@
                 padding-top:15px;
             ">
 
+
                 <p style="
                     display:flex;
                     justify-content:space-between;
-                    padding:8px 0;
+                    padding:10px 0;
                 ">
 
                     <span>
                         Treatment Cost
                     </span>
 
-                    <strong id="printTreatmentCost"></strong>
+                    <strong id="printTreatmentCost">
+                        LKR 0.00
+                    </strong>
 
                 </p>
 
@@ -826,14 +806,16 @@
                 <p style="
                     display:flex;
                     justify-content:space-between;
-                    padding:8px 0;
+                    padding:10px 0;
                 ">
 
                     <span>
                         Consultation Fee
                     </span>
 
-                    <strong id="printConsultation"></strong>
+                    <strong id="printConsultation">
+                        LKR 0.00
+                    </strong>
 
                 </p>
 
@@ -850,21 +832,25 @@
                         TOTAL
                     </strong>
 
-                    <strong id="printTotal"></strong>
+                    <strong id="printTotal">
+                        LKR 0.00
+                    </strong>
 
                 </p>
+
 
             </div>
 
 
             <p style="
                 text-align:center;
-                margin-top:40px;
+                margin-top:45px;
             ">
 
-                Thank you for visiting Sunrise Dental Clinic.
+                Thank you for choosing Sunrise Dental Clinic.
 
             </p>
+
 
         </div>
 
@@ -875,6 +861,9 @@
 
 
 <script>
+
+    let appointmentLoaded = false;
+
 
     const treatmentCost =
         document.getElementById(
@@ -906,21 +895,20 @@
         );
 
 
-    let appointmentLoaded = false;
-
-
     function formatCurrency(amount) {
 
         return "LKR " +
             Number(amount).toLocaleString(
                 "en-LK",
                 {
-                    minimumFractionDigits:2,
-                    maximumFractionDigits:2
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
                 }
             );
     }
 
+
+    /* CALCULATE TOTAL */
 
     function calculateTotal() {
 
@@ -965,6 +953,8 @@
     );
 
 
+    /* LOAD APPOINTMENT */
+
     function loadAppointment() {
 
         const appointmentNumber =
@@ -996,7 +986,7 @@
                 if (!response.ok) {
 
                     throw new Error(
-                        "Appointment not found"
+                        "Appointment not found."
                     );
                 }
 
@@ -1005,6 +995,7 @@
             })
 
             .then(appointment => {
+
 
                 document.getElementById(
                     "dentistName"
@@ -1053,14 +1044,23 @@
                 );
 
             });
+
     }
 
+
+    /* CLEAR */
 
     function clearForm() {
 
         document.getElementById(
-            "billForm"
-        ).reset();
+            "appointmentNumber"
+        ).value = "";
+
+
+        treatmentCost.value = "";
+
+
+        consultationFee.value = "";
 
 
         document.getElementById(
@@ -1079,8 +1079,11 @@
 
 
         calculateTotal();
+
     }
 
+
+    /* MESSAGE */
 
     function showMessage(
         text,
@@ -1106,307 +1109,99 @@
             "block";
 
 
-        setTimeout(() => {
+        setTimeout(
+            () => {
 
-            message.style.display =
-                "none";
+                message.style.display =
+                    "none";
 
-        }, 4000);
+            },
+            4000
+        );
+
     }
 
 
-    document.getElementById(
-        "billForm"
-    ).addEventListener(
-        "submit",
-        function(event) {
+    /* PRINT BILL */
 
-            event.preventDefault();
+    function printBill() {
 
 
-            const appointmentNumber =
-                document.getElementById(
-                    "appointmentNumber"
-                ).value.trim();
+        if (!appointmentLoaded) {
 
-
-            const treatmentCostValue =
-                treatmentCost.value;
-
-
-            const consultationFeeValue =
-                consultationFee.value;
-
-
-            if (!appointmentLoaded) {
-
-                showMessage(
-                    "Please load a valid appointment first.",
-                    true
-                );
-
-                return;
-            }
-
-
-            if (
-                !appointmentNumber ||
-                !treatmentCostValue ||
-                !consultationFeeValue
-            ) {
-
-                showMessage(
-                    "Please complete all billing fields.",
-                    true
-                );
-
-                return;
-            }
-
-
-            const formData =
-                new URLSearchParams();
-
-
-            formData.append(
-                "appointmentNumber",
-                appointmentNumber
+            showMessage(
+                "Please load an appointment first.",
+                true
             );
 
-
-            formData.append(
-                "treatmentCost",
-                treatmentCostValue
-            );
-
-
-            formData.append(
-                "consultationFee",
-                consultationFeeValue
-            );
-
-
-            fetch(
-                "billing",
-                {
-                    method:"POST",
-
-                    headers:{
-                        "Content-Type":
-                            "application/x-www-form-urlencoded"
-                    },
-
-                    body:formData
-                }
-            )
-
-                .then(response =>
-                    response.json()
-                )
-
-                .then(result => {
-
-                    if (result.success) {
-
-                        showMessage(
-                            "Bill generated successfully."
-                        );
-
-                        clearForm();
-
-                        loadBills();
-
-                    } else {
-
-                        showMessage(
-                            result.error ||
-                            "Unable to generate bill.",
-                            true
-                        );
-
-                    }
-
-                })
-
-                .catch(error => {
-
-                    console.error(error);
-
-                    showMessage(
-                        "Unable to generate bill.",
-                        true
-                    );
-
-                });
-
-        }
-    );
-
-
-    function loadBills() {
-
-        fetch("billing")
-
-            .then(response => {
-
-                if (!response.ok) {
-
-                    throw new Error(
-                        "Unable to load bill records"
-                    );
-
-                }
-
-                return response.json();
-
-            })
-
-            .then(bills => {
-
-                const tableBody =
-                    document.getElementById(
-                        "billTableBody"
-                    );
-
-
-                tableBody.innerHTML = "";
-
-
-                if (bills.length === 0) {
-
-                    tableBody.innerHTML = `
-                            <tr>
-                                <td colspan="8"
-                                    style="text-align:center;padding:25px">
-                                    No bill records found.
-                                </td>
-                            </tr>
-                        `;
-
-                    return;
-                }
-
-
-                bills.forEach(
-                    bill => {
-
-                        const row =
-                            document.createElement(
-                                "tr"
-                            );
-
-
-                        row.innerHTML = `
-
-                                    <td>
-                                        ${bill.billId}
-                                    </td>
-
-                                    <td>
-                                        ${bill.appointmentNumber}
-                                    </td>
-
-                                    <td>
-                                        ${bill.dentistName}
-                                    </td>
-
-                                    <td>
-                                        ${bill.treatmentName}
-                                    </td>
-
-                                    <td>
-                                        ${formatCurrency(
-                            bill.treatmentCost
-                        )}
-                                    </td>
-
-                                    <td>
-                                        ${formatCurrency(
-                            bill.consultationFee
-                        )}
-                                    </td>
-
-                                    <td>
-                                        <strong>
-                                            ${formatCurrency(
-                            bill.totalAmount
-                        )}
-                                        </strong>
-                                    </td>
-
-                                    <td>
-
-                                        <button
-                                                class="print-btn"
-                                                onclick="printBill(
-                                                    ${bill.billId},
-                                                    '${escapeForJs(
-                            bill.appointmentNumber
-                        )}',
-                                                    '${escapeForJs(
-                            bill.dentistName
-                        )}',
-                                                    '${escapeForJs(
-                            bill.treatmentName
-                        )}',
-                                                    ${bill.treatmentCost},
-                                                    ${bill.consultationFee},
-                                                    ${bill.totalAmount}
-                                                )">
-
-                                            🖨 Print
-
-                                        </button>
-
-                                    </td>
-
-                                `;
-
-
-                        tableBody.appendChild(
-                            row
-                        );
-
-                    }
-                );
-
-            })
-
-            .catch(error => {
-
-                console.error(error);
-
-            });
-    }
-
-
-    function escapeForJs(value) {
-
-        if (!value) {
-            return "";
+            return;
         }
 
-        return String(value)
-            .replace(/\\/g, "\\\\")
-            .replace(/'/g, "\\'");
-    }
+
+        const appointmentNumber =
+            document.getElementById(
+                "appointmentNumber"
+            ).value.trim();
 
 
-    function printBill(
-        billId,
-        appointmentNumber,
-        dentist,
-        treatment,
-        treatmentCost,
-        consultationFee,
-        totalAmount) {
+        const dentist =
+            document.getElementById(
+                "dentistName"
+            ).textContent;
 
 
-        document.getElementById(
-            "printBillId"
-        ).textContent =
-            billId;
+        const treatment =
+            document.getElementById(
+                "treatmentName"
+            ).textContent;
 
+
+        const treatmentAmount =
+            parseFloat(
+                treatmentCost.value
+            );
+
+
+        const consultationAmount =
+            parseFloat(
+                consultationFee.value
+            );
+
+
+        if (
+            isNaN(treatmentAmount) ||
+            isNaN(consultationAmount)
+        ) {
+
+            showMessage(
+                "Please enter the treatment cost and consultation fee.",
+                true
+            );
+
+            return;
+        }
+
+
+        if (
+            treatmentAmount < 0 ||
+            consultationAmount < 0
+        ) {
+
+            showMessage(
+                "Bill amounts cannot be negative.",
+                true
+            );
+
+            return;
+        }
+
+
+        const total =
+            treatmentAmount +
+            consultationAmount;
+
+
+        /* PUT DATA INTO RECEIPT */
 
         document.getElementById(
             "printAppointment"
@@ -1430,7 +1225,7 @@
             "printTreatmentCost"
         ).textContent =
             formatCurrency(
-                treatmentCost
+                treatmentAmount
             );
 
 
@@ -1438,7 +1233,7 @@
             "printConsultation"
         ).textContent =
             formatCurrency(
-                consultationFee
+                consultationAmount
             );
 
 
@@ -1446,17 +1241,15 @@
             "printTotal"
         ).textContent =
             formatCurrency(
-                totalAmount
+                total
             );
 
 
+        /* PRINT */
+
         window.print();
+
     }
-
-
-    loadBills();
-
-    calculateTotal();
 
 </script>
 
