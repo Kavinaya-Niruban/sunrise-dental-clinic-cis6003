@@ -7,14 +7,17 @@ public class Appointment {
 
     private int appointmentId;
     private String appointmentNumber;
-    private int patientId;
+
+    private String patientName;
+    private String address;
+    private String contactNumber;
+
     private int dentistId;
     private int treatmentId;
+
     private LocalDate appointmentDate;
     private LocalTime appointmentTime;
 
-    // Display information
-    private String patientName;
     private String dentistName;
     private String treatmentName;
 
@@ -24,7 +27,9 @@ public class Appointment {
     public Appointment(
             int appointmentId,
             String appointmentNumber,
-            int patientId,
+            String patientName,
+            String address,
+            String contactNumber,
             int dentistId,
             int treatmentId,
             LocalDate appointmentDate,
@@ -32,7 +37,9 @@ public class Appointment {
 
         this.appointmentId = appointmentId;
         this.appointmentNumber = appointmentNumber;
-        this.patientId = patientId;
+        this.patientName = patientName;
+        this.address = address;
+        this.contactNumber = contactNumber;
         this.dentistId = dentistId;
         this.treatmentId = treatmentId;
         this.appointmentDate = appointmentDate;
@@ -55,12 +62,28 @@ public class Appointment {
         this.appointmentNumber = appointmentNumber;
     }
 
-    public int getPatientId() {
-        return patientId;
+    public String getPatientName() {
+        return patientName;
     }
 
-    public void setPatientId(int patientId) {
-        this.patientId = patientId;
+    public void setPatientName(String patientName) {
+        this.patientName = patientName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
     }
 
     public int getDentistId() {
@@ -93,14 +116,6 @@ public class Appointment {
 
     public void setAppointmentTime(LocalTime appointmentTime) {
         this.appointmentTime = appointmentTime;
-    }
-
-    public String getPatientName() {
-        return patientName;
-    }
-
-    public void setPatientName(String patientName) {
-        this.patientName = patientName;
     }
 
     public String getDentistName() {

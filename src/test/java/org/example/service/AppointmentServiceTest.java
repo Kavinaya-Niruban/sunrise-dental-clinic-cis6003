@@ -16,4 +16,12 @@ class AppointmentServiceTest {
                 appointmentService.searchAppointment("")
         );
     }
+
+    @Test
+    void shouldRejectNullAppointmentNumber() {
+
+        assertNull(
+                appointmentService.searchAppointment(null)
+        );
+    }
 }

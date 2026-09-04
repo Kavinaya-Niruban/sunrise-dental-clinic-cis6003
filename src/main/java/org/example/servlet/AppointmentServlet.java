@@ -7,7 +7,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import org.example.model.Appointment;
-import org.example.model.Patient;
 import org.example.service.AppointmentService;
 
 import java.io.IOException;
@@ -159,19 +158,13 @@ public class AppointmentServlet extends HttpServlet {
                             )
                     );
 
-            Patient patient =
-                    new Patient(
-                            0,
-                            patientName,
-                            address,
-                            contactNumber
-                    );
-
             Appointment appointment =
                     new Appointment(
                             0,
                             appointmentNumber,
-                            0,
+                            patientName,
+                            address,
+                            contactNumber,
                             dentistId,
                             treatmentId,
                             appointmentDate,
@@ -180,7 +173,6 @@ public class AppointmentServlet extends HttpServlet {
 
             boolean success =
                     appointmentService.registerAppointment(
-                            patient,
                             appointment
                     );
 
@@ -224,6 +216,18 @@ public class AppointmentServlet extends HttpServlet {
                 + ",\"patientName\":\""
                 + escapeJson(
                 appointment.getPatientName()
+        )
+                + "\""
+
+                + ",\"address\":\""
+                + escapeJson(
+                appointment.getAddress()
+        )
+                + "\""
+
+                + ",\"contactNumber\":\""
+                + escapeJson(
+                appointment.getContactNumber()
         )
                 + "\""
 

@@ -22,4 +22,17 @@ class DentistServiceTest {
 
         assertEquals(-1, result);
     }
+
+    @Test
+    void shouldRejectDentistWithEmptyContactNumber() {
+
+        Dentist dentist = new Dentist();
+
+        dentist.setDentistName("Dr. Silva");
+        dentist.setContactNumber("");
+
+        int result = dentistService.addDentist(dentist);
+
+        assertEquals(-1, result);
+    }
 }

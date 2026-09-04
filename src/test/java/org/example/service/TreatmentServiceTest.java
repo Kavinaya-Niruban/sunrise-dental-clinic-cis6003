@@ -25,4 +25,36 @@ class TreatmentServiceTest {
 
         assertEquals(-1, result);
     }
+
+    @Test
+    void shouldRejectTreatmentWithEmptyDescription() {
+
+        Treatment treatment = new Treatment(
+                0,
+                "Teeth Cleaning",
+                4500,
+                "45 min",
+                ""
+        );
+
+        int result = treatmentService.addTreatment(treatment);
+
+        assertEquals(-1, result);
+    }
+
+    @Test
+    void shouldRejectTreatmentWithEmptyDuration() {
+
+        Treatment treatment = new Treatment(
+                0,
+                "Teeth Cleaning",
+                4500,
+                "",
+                "Professional dental cleaning"
+        );
+
+        int result = treatmentService.addTreatment(treatment);
+
+        assertEquals(-1, result);
+    }
 }

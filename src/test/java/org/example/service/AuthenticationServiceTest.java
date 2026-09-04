@@ -16,4 +16,12 @@ class AuthenticationServiceTest {
                 authenticationService.login("", "admin123")
         );
     }
+
+    @Test
+    void shouldRejectEmptyPassword() {
+
+        assertNull(
+                authenticationService.login("admin", "")
+        );
+    }
 }
