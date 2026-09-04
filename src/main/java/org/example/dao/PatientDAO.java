@@ -35,12 +35,9 @@ public class PatientDAO {
             }
 
         } catch (Exception e) {
-            System.out.println("=== PATIENT INSERT FAILED ===");
-            e.printStackTrace();
+            throw new RuntimeException("Patient database insertion failed.", e);
         }
 
         return -1;
     }
 }
-
-

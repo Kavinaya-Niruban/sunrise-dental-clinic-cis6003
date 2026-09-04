@@ -13,7 +13,6 @@ import java.io.IOException;
 @WebServlet("/patients")
 public class PatientServlet extends HttpServlet {
 
-
     private PatientService patientService;
 
     @Override
@@ -26,30 +25,44 @@ public class PatientServlet extends HttpServlet {
                           HttpServletResponse response)
             throws ServletException, IOException {
 
-        String patientName = request.getParameter("patientName");
-        String address = request.getParameter("address");
-        String contactNumber = request.getParameter("contactNumber");
+        try {
 
-        Patient patient = new Patient();
+            String patientName = request.getParameter("patientName");
+            String address = request.getParameter("address");
+            String contactNumber = request.getParameter("contactNumber");
 
-        patient.setPatientName(patientName);
-        patient.setAddress(address);
-        patient.setContactNumber(contactNumber);
+            Patient patient = new Patient();
 
-        int patientId = patientService.registerPatient(patient);
+            patient.setPatientName(patientName);
+            patient.setAddress(address);
+            patient.setContactNumber(contactNumber);
 
-        if (patientId > 0) {
+            int patientId = patientService.registerPatient(patient);
 
-            response.sendRedirect(
-                    "patients.html?success=true&patientId=" + patientId
-            );
+            if (patientId > 0) {
 
-        } else {
+                response.sendRedirect(
+                        "patients.html?success=true&patientId=" + patientId
+                );
 
-            response.sendRedirect(
-                    "patients.html?error=true"
-            );
+            } else {
+
+                response.sendRedirect(
+                        "patients.html?error=true"
+                );
+            }
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+            response.setContentType("text/html");
+            response.getWriter().println("<h2>Patient Registration Error</h2>");
+            response.getWriter().println("<pre>");
+
+            e.printStackTrace(response.getWriter());
+
+            response.getWriter().println("</pre>");
         }
     }
-
 }
