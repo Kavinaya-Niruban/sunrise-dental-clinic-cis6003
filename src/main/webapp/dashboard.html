@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | Sunrise Dental Clinic</title>
+
+    <style>
+
+        /* =====================================================
+           SUNRISE DENTAL CLINIC
+           STANDARD COLOUR SYSTEM
+           ===================================================== */
+
+        :root {
+            --primary-dark: #064d60;
+            --primary: #075f70;
+            --primary-light: #087f8c;
+
+            --accent: #8ee9ef;
+
+            --background-1: #c9f3f5;
+            --background-2: #b9e7f0;
+            --background-3: #e9f8fa;
+            --background-4: #f7fcfd;
+
+            --white: #ffffff;
+            --text-dark: #16343b;
+            --text-medium: #45656d;
+            --text-light: #789097;
+
+            --success: #2e9b73;
+            --warning: #d99a35;
+            --danger: #d95c5c;
+
+            --border: rgba(255, 255, 255, 0.65);
+
+            --shadow-soft:
+                    0 10px 30px rgba(6, 77, 96, 0.10);
+
+            --shadow-medium:
+                    0 15px 40px rgba(6, 77, 96, 0.15);
+
+            --radius-large: 24px;
+            --radius-medium: 16px;
+            --radius-small: 12px;
+        }
+
+
+        /* =====================================================
+           RESET
+           ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family:
+                    "Segoe UI",
+                    Tahoma,
+                    Geneva,
+                    Verdana,
+                    sans-serif;
+
+            color: var(--text-dark);
+
+            min-height: 100vh;
+
+            background:
+                    radial-gradient(
+                            circle at top left,
+                            rgba(142, 233, 239, 0.45),
+                            transparent 35%
+                    ),
+                    linear-gradient(
+                            135deg,
+                            var(--background-1),
+                            var(--background-3),
+                            var(--background-4)
+                    );
+        }
+
+
+        /* =====================================================
+           MAIN LAYOUT
+           ===================================================== */
+
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+
+        /* =====================================================
+           SIDEBAR
+           ===================================================== */
+
+        .sidebar {
+            width: 260px;
+            min-height: 100vh;
+
+            position: fixed;
+            left: 0;
+            top: 0;
+
+            display: flex;
+            flex-direction: column;
+
+            padding: 28px 18px;
+
+            background:
+                    linear-gradient(
+                            180deg,
+                            var(--primary-dark),
+                            var(--primary),
+                            var(--primary-light)
+                    );
+
+            box-shadow:
+                    10px 0 30px rgba(6, 77, 96, 0.15);
+
+            z-index: 100;
+        }
+
+
+        /* =====================================================
+           BRAND
+           ===================================================== */
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            padding: 8px 10px 30px;
+        }
+
+        .brand-icon {
+            width: 46px;
+            height: 46px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 14px;
+
+            background: rgba(255, 255, 255, 0.16);
+
+            color: var(--white);
+
+            font-size: 22px;
+
+            border:
+                    1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .brand-text h1 {
+            color: var(--white);
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+        }
+
+        .brand-text p {
+            color: rgba(255, 255, 255, 0.68);
+            font-size: 11px;
+            margin-top: 3px;
+        }
+
+
+        /* =====================================================
+           NAVIGATION
+           ===================================================== */
+
+        .nav-section-title {
+            color: rgba(255, 255, 255, 0.45);
+
+            font-size: 10px;
+            font-weight: 700;
+
+            letter-spacing: 1.3px;
+            text-transform: uppercase;
+
+            padding: 0 12px 10px;
+        }
+
+        .nav-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+
+            padding: 12px 13px;
+
+            color: rgba(255, 255, 255, 0.78);
+
+            text-decoration: none;
+
+            border-radius: 12px;
+
+            font-size: 13px;
+            font-weight: 500;
+
+            transition:
+                    background 0.2s ease,
+                    color 0.2s ease,
+                    transform 0.2s ease;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.10);
+            color: var(--white);
+
+            transform: translateX(2px);
+        }
+
+        .nav-link.active {
+            background: rgba(255, 255, 255, 0.16);
+            color: var(--white);
+
+            box-shadow:
+                    inset 3px 0 0 var(--accent);
+        }
+
+        .nav-icon {
+            width: 22px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+
+        /* =====================================================
+           SIDEBAR FOOTER
+           ===================================================== */
+
+        .sidebar-footer {
+            margin-top: auto;
+
+            padding: 15px 10px 0;
+
+            border-top:
+                    1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .clinic-status {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+
+            color: rgba(255, 255, 255, 0.7);
+
+            font-size: 11px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+
+            border-radius: 50%;
+
+            background: #72d7a9;
+
+            box-shadow:
+                    0 0 10px rgba(114, 215, 169, 0.7);
+        }
+
+
+        /* =====================================================
+           MAIN CONTENT
+           ===================================================== */
+
+        .main-content {
+            margin-left: 260px;
+
+            width: calc(100% - 260px);
+
+            padding: 30px 36px 40px;
+        }
+
+
+        /* =====================================================
+           TOP BAR
+           ===================================================== */
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 30px;
+        }
+
+        .welcome h2 {
+            font-size: 26px;
+            font-weight: 700;
+
+            color: var(--text-dark);
+        }
+
+        .welcome p {
+            margin-top: 5px;
+
+            color: var(--text-light);
+
+            font-size: 13px;
+        }
+
+
+        /* =====================================================
+           PROFILE
+           ===================================================== */
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            padding: 8px 12px 8px 8px;
+
+            background:
+                    rgba(255, 255, 255, 0.62);
+
+            border:
+                    1px solid var(--border);
+
+            border-radius: 50px;
+
+            box-shadow: var(--shadow-soft);
+        }
+
+        .profile-avatar {
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            color: var(--white);
+
+            font-size: 14px;
+            font-weight: 700;
+
+            background:
+                    linear-gradient(
+                            135deg,
+                            var(--primary-light),
+                            var(--primary-dark)
+                    );
+        }
+
+        .profile-info strong {
+            display: block;
+
+            font-size: 12px;
+            color: var(--text-dark);
+        }
+
+        .profile-info span {
+            display: block;
+
+            margin-top: 2px;
+
+            font-size: 10px;
+            color: var(--text-light);
+        }
+
+
+        /* =====================================================
+           STATISTICS
+           ===================================================== */
+
+        .stats-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 18px;
+
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            position: relative;
+
+            padding: 21px;
+
+            background:
+                    rgba(255, 255, 255, 0.68);
+
+            border:
+                    1px solid var(--border);
+
+            border-radius: var(--radius-large);
+
+            box-shadow: var(--shadow-soft);
+
+            backdrop-filter: blur(15px);
+
+            transition:
+                    transform 0.2s ease,
+                    box-shadow 0.2s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+
+            box-shadow: var(--shadow-medium);
+        }
+
+        .stat-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+
+            font-size: 11px;
+            font-weight: 600;
+
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-icon {
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 11px;
+
+            background:
+                    rgba(8, 127, 140, 0.10);
+
+            color: var(--primary-light);
+
+            font-size: 17px;
+        }
+
+        .stat-number {
+            margin-top: 13px;
+
+            font-size: 27px;
+            font-weight: 700;
+
+            color: var(--text-dark);
+        }
+
+        .stat-change {
+            margin-top: 6px;
+
+            font-size: 10px;
+        }
+
+        .positive {
+            color: var(--success);
+        }
+
+        .neutral {
+            color: var(--text-light);
+        }
+
+
+        /* =====================================================
+           CONTENT GRID
+           ===================================================== */
+
+        .content-grid {
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1.7fr)
+                minmax(280px, 0.9fr);
+
+            gap: 22px;
+        }
+
+
+        /* =====================================================
+           CARDS
+           ===================================================== */
+
+        .card {
+            background:
+                    rgba(255, 255, 255, 0.70);
+
+            border:
+                    1px solid var(--border);
+
+            border-radius: var(--radius-large);
+
+            box-shadow: var(--shadow-soft);
+
+            backdrop-filter: blur(15px);
+
+            overflow: hidden;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 21px 22px 15px;
+        }
+
+        .card-title {
+            font-size: 15px;
+            font-weight: 700;
+
+            color: var(--text-dark);
+        }
+
+        .card-subtitle {
+            margin-top: 4px;
+
+            color: var(--text-light);
+
+            font-size: 10px;
+        }
+
+        .view-all {
+            color: var(--primary-light);
+
+            text-decoration: none;
+
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .view-all:hover {
+            text-decoration: underline;
+        }
+
+
+        /* =====================================================
+           APPOINTMENTS
+           ===================================================== */
+
+        .appointments {
+            padding: 0 22px 20px;
+        }
+
+        .appointment {
+            display: flex;
+            align-items: center;
+
+            padding: 14px 0;
+
+            border-bottom:
+                    1px solid rgba(6, 77, 96, 0.08);
+        }
+
+        .appointment:last-child {
+            border-bottom: none;
+        }
+
+        .appointment-time {
+            width: 65px;
+
+            color: var(--primary);
+
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .patient-avatar {
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-right: 12px;
+
+            border-radius: 11px;
+
+            background:
+                    linear-gradient(
+                            135deg,
+                            #dff8fa,
+                            #c4edf1
+                    );
+
+            color: var(--primary-dark);
+
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .patient-info {
+            flex: 1;
+        }
+
+        .patient-info strong {
+            display: block;
+
+            color: var(--text-dark);
+
+            font-size: 12px;
+        }
+
+        .patient-info span {
+            display: block;
+
+            margin-top: 3px;
+
+            color: var(--text-light);
+
+            font-size: 10px;
+        }
+
+        .appointment-status {
+            padding: 5px 9px;
+
+            border-radius: 20px;
+
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        .confirmed {
+            background: rgba(46, 155, 115, 0.11);
+            color: var(--success);
+        }
+
+        .pending {
+            background: rgba(217, 154, 53, 0.12);
+            color: var(--warning);
+        }
+
+
+        /* =====================================================
+           QUICK ACTIONS
+           ===================================================== */
+
+        .quick-actions {
+            padding: 0 22px 22px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 10px;
+        }
+
+        .action {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            padding: 12px;
+
+            text-decoration: none;
+
+            border:
+                    1px solid rgba(6, 77, 96, 0.08);
+
+            border-radius: var(--radius-small);
+
+            background:
+                    rgba(255, 255, 255, 0.52);
+
+            color: var(--text-dark);
+
+            transition:
+                    background 0.2s ease,
+                    transform 0.2s ease;
+        }
+
+        .action:hover {
+            background: var(--white);
+
+            transform: translateY(-2px);
+        }
+
+        .action-icon {
+            width: 32px;
+            height: 32px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 9px;
+
+            background:
+                    rgba(8, 127, 140, 0.10);
+
+            color: var(--primary-light);
+        }
+
+        .action span {
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+
+        /* =====================================================
+           REMINDER
+           ===================================================== */
+
+        .reminder {
+            margin: 0 22px 22px;
+
+            padding: 16px;
+
+            border-radius: var(--radius-medium);
+
+            background:
+                    linear-gradient(
+                            135deg,
+                            rgba(8, 127, 140, 0.10),
+                            rgba(142, 233, 239, 0.18)
+                    );
+
+            border:
+                    1px solid rgba(8, 127, 140, 0.10);
+        }
+
+        .reminder-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            color: var(--primary-dark);
+
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .reminder p {
+            margin-top: 7px;
+
+            color: var(--text-medium);
+
+            font-size: 10px;
+            line-height: 1.6;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+           ===================================================== */
+
+        @media (max-width: 1100px) {
+
+            .stats-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+        @media (max-width: 800px) {
+
+            .sidebar {
+                width: 76px;
+
+                padding: 20px 10px;
+            }
+
+            .brand-text,
+            .nav-section-title,
+            .nav-link span,
+            .clinic-status {
+                display: none;
+            }
+
+            .brand {
+                justify-content: center;
+                padding-bottom: 25px;
+            }
+
+            .nav-link {
+                justify-content: center;
+            }
+
+            .main-content {
+                margin-left: 76px;
+
+                width: calc(100% - 76px);
+
+                padding: 25px 20px;
+            }
+        }
+
+
+        @media (max-width: 600px) {
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .topbar {
+                align-items: flex-start;
+            }
+
+            .profile-info {
+                display: none;
+            }
+
+            .welcome h2 {
+                font-size: 21px;
+            }
+
+            .main-content {
+                padding: 20px 14px;
+            }
+
+            .appointment-status {
+                display: none;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+<div class="app-container">
+
+
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                🦷
+            </div>
+
+            <div class="brand-text">
+                <h1>Sunrise Dental</h1>
+                <p>Clinic Management System</p>
+            </div>
+
+        </div>
+
+
+        <div class="nav-section-title">
+            Main Menu
+        </div>
+
+
+        <nav class="nav-menu">
+
+            <a href="dashboard.html"
+               class="nav-link active">
+
+                <span class="nav-icon">⌂</span>
+                <span>Dashboard</span>
+
+            </a>
+
+
+            <a href="patients.html"
+               class="nav-link">
+
+                <span class="nav-icon">♙</span>
+                <span>Patients</span>
+
+            </a>
+
+
+            <a href="appointments.html"
+               class="nav-link">
+
+                <span class="nav-icon">▣</span>
+                <span>Appointments</span>
+
+            </a>
+
+
+            <a href="dentists.html"
+               class="nav-link">
+
+                <span class="nav-icon">♟</span>
+                <span>Dentists</span>
+
+            </a>
+
+
+            <a href="treatments.html"
+               class="nav-link">
+
+                <span class="nav-icon">✚</span>
+                <span>Treatments</span>
+
+            </a>
+
+
+            <a href="billing.html"
+               class="nav-link">
+
+                <span class="nav-icon">▤</span>
+                <span>Billing</span>
+
+            </a>
+
+
+            <a href="reports.html"
+               class="nav-link">
+
+                <span class="nav-icon">▥</span>
+                <span>Reports</span>
+
+            </a>
+
+
+            <a href="settings.html"
+               class="nav-link">
+
+                <span class="nav-icon">⚙</span>
+                <span>Settings</span>
+
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-footer">
+
+            <div class="clinic-status">
+
+                <span class="status-dot"></span>
+
+                <span>System Online</span>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+         ===================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+            <div class="welcome">
+
+                <h2>Good morning 👋</h2>
+
+                <p>
+                    Welcome back to the Sunrise Dental Clinic dashboard.
+                </p>
+
+            </div>
+
+
+            <div class="profile">
+
+                <div class="profile-avatar">
+                    AD
+                </div>
+
+                <div class="profile-info">
+
+                    <strong>Admin User</strong>
+
+                    <span>Administrator</span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =================================================
+             STATISTICS
+             ================================================= -->
+
+        <section class="stats-grid">
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <span class="stat-label">
+                        Total Patients
+                    </span>
+
+                    <div class="stat-icon">
+                        ♙
+                    </div>
+
+                </div>
+
+                <div class="stat-number">
+                    248
+                </div>
+
+                <div class="stat-change positive">
+                    ↑ 12% this month
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <span class="stat-label">
+                        Today's Appointments
+                    </span>
+
+                    <div class="stat-icon">
+                        ▣
+                    </div>
+
+                </div>
+
+                <div class="stat-number">
+                    18
+                </div>
+
+                <div class="stat-change positive">
+                    4 remaining
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <span class="stat-label">
+                        Active Dentists
+                    </span>
+
+                    <div class="stat-icon">
+                        ♟
+                    </div>
+
+                </div>
+
+                <div class="stat-number">
+                    8
+                </div>
+
+                <div class="stat-change neutral">
+                    Currently available
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <span class="stat-label">
+                        Monthly Revenue
+                    </span>
+
+                    <div class="stat-icon">
+                        $
+                    </div>
+
+                </div>
+
+                <div class="stat-number">
+                    $12,840
+                </div>
+
+                <div class="stat-change positive">
+                    ↑ 8.4% this month
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             MAIN DASHBOARD GRID
+             ================================================= -->
+
+        <section class="content-grid">
+
+
+            <!-- =============================================
+                 TODAY'S APPOINTMENTS
+                 ============================================= -->
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <div class="card-title">
+                            Today's Appointments
+                        </div>
+
+                        <div class="card-subtitle">
+                            Scheduled appointments for today
+                        </div>
+
+                    </div>
+
+                    <a href="appointments.html"
+                       class="view-all">
+                        View all →
+                    </a>
+
+                </div>
+
+
+                <div class="appointments">
+
+
+                    <div class="appointment">
+
+                        <div class="appointment-time">
+                            09:00
+                        </div>
+
+                        <div class="patient-avatar">
+                            AS
+                        </div>
+
+                        <div class="patient-info">
+
+                            <strong>
+                                Amelia Silva
+                            </strong>
+
+                            <span>
+                                Routine Dental Check-up
+                            </span>
+
+                        </div>
+
+                        <span class="appointment-status confirmed">
+                            Confirmed
+                        </span>
+
+                    </div>
+
+
+
+                    <div class="appointment">
+
+                        <div class="appointment-time">
+                            10:30
+                        </div>
+
+                        <div class="patient-avatar">
+                            RJ
+                        </div>
+
+                        <div class="patient-info">
+
+                            <strong>
+                                Ryan James
+                            </strong>
+
+                            <span>
+                                Teeth Cleaning
+                            </span>
+
+                        </div>
+
+                        <span class="appointment-status confirmed">
+                            Confirmed
+                        </span>
+
+                    </div>
+
+
+
+                    <div class="appointment">
+
+                        <div class="appointment-time">
+                            12:00
+                        </div>
+
+                        <div class="patient-avatar">
+                            NK
+                        </div>
+
+                        <div class="patient-info">
+
+                            <strong>
+                                Noah Kumar
+                            </strong>
+
+                            <span>
+                                Dental Consultation
+                            </span>
+
+                        </div>
+
+                        <span class="appointment-status pending">
+                            Pending
+                        </span>
+
+                    </div>
+
+
+
+                    <div class="appointment">
+
+                        <div class="appointment-time">
+                            14:30
+                        </div>
+
+                        <div class="patient-avatar">
+                            EM
+                        </div>
+
+                        <div class="patient-info">
+
+                            <strong>
+                                Emma Martin
+                            </strong>
+
+                            <span>
+                                Root Canal Consultation
+                            </span>
+
+                        </div>
+
+                        <span class="appointment-status confirmed">
+                            Confirmed
+                        </span>
+
+                    </div>
+
+
+
+                    <div class="appointment">
+
+                        <div class="appointment-time">
+                            16:00
+                        </div>
+
+                        <div class="patient-avatar">
+                            OL
+                        </div>
+
+                        <div class="patient-info">
+
+                            <strong>
+                                Olivia Lee
+                            </strong>
+
+                            <span>
+                                Follow-up Appointment
+                            </span>
+
+                        </div>
+
+                        <span class="appointment-status pending">
+                            Pending
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =============================================
+                 RIGHT COLUMN
+                 ============================================= -->
+
+            <div>
+
+
+                <!-- QUICK ACTIONS -->
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <div class="card-title">
+                                Quick Actions
+                            </div>
+
+                            <div class="card-subtitle">
+                                Frequently used tools
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="quick-actions">
+
+
+                        <a href="patients.html"
+                           class="action">
+
+                            <div class="action-icon">
+                                +
+                            </div>
+
+                            <span>
+                                Add Patient
+                            </span>
+
+                        </a>
+
+
+                        <a href="appointments.html"
+                           class="action">
+
+                            <div class="action-icon">
+                                +
+                            </div>
+
+                            <span>
+                                New Appointment
+                            </span>
+
+                        </a>
+
+
+                        <a href="treatments.html"
+                           class="action">
+
+                            <div class="action-icon">
+                                +
+                            </div>
+
+                            <span>
+                                Add Treatment
+                            </span>
+
+                        </a>
+
+
+                        <a href="billing.html"
+                           class="action">
+
+                            <div class="action-icon">
+                                $
+                            </div>
+
+                            <span>
+                                Create Invoice
+                            </span>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- SYSTEM REMINDER -->
+
+                <div class="card"
+                     style="margin-top: 22px;">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <div class="card-title">
+                                System Reminder
+                            </div>
+
+                            <div class="card-subtitle">
+                                Important information
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="reminder">
+
+                        <div class="reminder-title">
+
+                            <span>🔔</span>
+
+                            Daily Reminder
+
+                        </div>
+
+                        <p>
+                            Please review today's appointments
+                            and ensure all patient records are
+                            up to date before the clinic closes.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>
