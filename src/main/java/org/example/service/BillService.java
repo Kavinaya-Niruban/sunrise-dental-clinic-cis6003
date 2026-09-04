@@ -1,6 +1,8 @@
 package org.example.service;
 
+import org.example.dao.AppointmentDAO;
 import org.example.dao.BillDAO;
+import org.example.model.Appointment;
 import org.example.model.Bill;
 
 import java.util.List;
@@ -8,40 +10,70 @@ import java.util.List;
 public class BillService {
 
     private final BillDAO billDAO;
+    private final AppointmentDAO appointmentDAO;
 
     public BillService() {
         billDAO = new BillDAO();
+        appointmentDAO = new AppointmentDAO();
     }
 
-    public boolean createBill(Bill bill) {
+    public Appointment findAppointment(String appointmentNumber) {
 
-        if (bill == null) {
+        if (appointmentNumber == null ||
+                appointmentNumber.trim().isEmpty()) {
+
+            return null;
+        }
+
+        return appointmentDAO.findByAppointmentNumber(
+                appointmentNumber.trim()
+        );
+    }
+
+    public boolean createBill(
+            String appointmentNumber,
+            double treatmentCost,
+            double consultationFee) {
+
+        if (appointmentNumber == null ||
+                appointmentNumber.trim().isEmpty()) {
+
             return false;
         }
 
-        if (bill.getAppointmentId() <= 0) {
+        if (treatmentCost < 0 ||
+                consultationFee < 0) {
+
             return false;
         }
 
-        if (bill.getTreatmentCost() < 0) {
+        Appointment appointment =
+                appointmentDAO.findByAppointmentNumber(
+                        appointmentNumber.trim()
+                );
+
+        if (appointment == null) {
             return false;
         }
 
-        if (bill.getConsultationFee() < 0) {
-            return false;
-        }
+        double totalAmount =
+                treatmentCost + consultationFee;
 
-        double total =
-                bill.getTreatmentCost()
-                        + bill.getConsultationFee();
-
-        bill.setTotalAmount(total);
+        Bill bill = new Bill(
+                0,
+                appointment.getAppointmentId(),
+                appointment.getAppointmentNumber(),
+                appointment.getDentistName(),
+                appointment.getTreatmentName(),
+                treatmentCost,
+                consultationFee,
+                totalAmount
+        );
 
         return billDAO.addBill(bill);
     }
 
     public List<Bill> getAllBills() {
-
         return billDAO.getAllBills();
     }
 }

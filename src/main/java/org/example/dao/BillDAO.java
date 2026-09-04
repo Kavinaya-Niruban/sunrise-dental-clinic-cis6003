@@ -55,19 +55,33 @@ public class BillDAO {
         }
     }
 
+
     public List<Bill> getAllBills() {
 
         List<Bill> bills = new ArrayList<>();
 
         String sql = """
                 SELECT
-                    bill_id,
-                    appointment_id,
-                    treatment_cost,
-                    consultation_fee,
-                    total_amount
-                FROM bill
-                ORDER BY bill_id DESC
+                    b.bill_id,
+                    b.appointment_id,
+                    a.appointment_number,
+                    d.dentist_name,
+                    t.treatment_name,
+                    b.treatment_cost,
+                    b.consultation_fee,
+                    b.total_amount
+                FROM bill b
+
+                INNER JOIN appointments a
+                    ON b.appointment_id = a.appointment_id
+
+                INNER JOIN dentists d
+                    ON a.dentist_id = d.dentist_id
+
+                INNER JOIN treatments t
+                    ON a.treatment_id = t.treatment_id
+
+                ORDER BY b.bill_id DESC
                 """;
 
         try (Connection connection = DBConnection.getConnection();
@@ -79,11 +93,34 @@ public class BillDAO {
             while (resultSet.next()) {
 
                 Bill bill = new Bill(
+
                         resultSet.getInt("bill_id"),
+
                         resultSet.getInt("appointment_id"),
-                        resultSet.getDouble("treatment_cost"),
-                        resultSet.getDouble("consultation_fee"),
-                        resultSet.getDouble("total_amount")
+
+                        resultSet.getString(
+                                "appointment_number"
+                        ),
+
+                        resultSet.getString(
+                                "dentist_name"
+                        ),
+
+                        resultSet.getString(
+                                "treatment_name"
+                        ),
+
+                        resultSet.getDouble(
+                                "treatment_cost"
+                        ),
+
+                        resultSet.getDouble(
+                                "consultation_fee"
+                        ),
+
+                        resultSet.getDouble(
+                                "total_amount"
+                        )
                 );
 
                 bills.add(bill);

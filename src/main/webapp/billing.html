@@ -1,240 +1,1466 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
     <title>Billing | Sunrise Dental Clinic</title>
 
     <style>
-        *{box-sizing:border-box;margin:0;padding:0}
+
+        *{
+            box-sizing:border-box;
+            margin:0;
+            padding:0
+        }
 
         body{
             font-family:"Segoe UI",Arial,sans-serif;
-            background:linear-gradient(135deg,#c9f3f5,#e9f8fa,#b9e7f0);
-            color:#16343b;min-height:100vh
+            background:linear-gradient(
+                    135deg,
+                    #c9f3f5,
+                    #e9f8fa,
+                    #b9e7f0
+            );
+            color:#16343b;
+            min-height:100vh
         }
 
         .sidebar{
-            position:fixed;left:0;top:0;width:250px;height:100vh;
-            background:#064d60;color:white;padding:28px 18px
+            position:fixed;
+            left:0;
+            top:0;
+            width:250px;
+            height:100vh;
+            background:#064d60;
+            color:white;
+            padding:28px 18px
         }
 
-        .brand{display:flex;align-items:center;gap:12px;margin-bottom:40px}
-        .brand-icon{font-size:32px}.brand h2{font-size:19px}
-        .brand span{display:block;font-size:11px;opacity:.7;margin-top:3px}
+        .brand{
+            display:flex;
+            align-items:center;
+            gap:12px;
+            margin-bottom:40px
+        }
 
-        .menu-title{font-size:11px;opacity:.6;margin:20px 12px 10px;letter-spacing:1px}
+        .brand-icon{
+            font-size:32px
+        }
+
+        .brand h2{
+            font-size:19px
+        }
+
+        .brand span{
+            display:block;
+            font-size:11px;
+            opacity:.7;
+            margin-top:3px
+        }
+
+        .menu-title{
+            font-size:11px;
+            opacity:.6;
+            margin:20px 12px 10px;
+            letter-spacing:1px
+        }
 
         .nav a{
-            display:block;text-decoration:none;color:white;padding:12px 14px;
-            border-radius:10px;margin-bottom:5px;font-size:14px
+            display:block;
+            text-decoration:none;
+            color:white;
+            padding:12px 14px;
+            border-radius:10px;
+            margin-bottom:5px;
+            font-size:14px
         }
 
-        .nav a:hover,.nav a.active{background:#087f8c}
+        .nav a:hover,
+        .nav a.active{
+            background:#087f8c
+        }
 
-        .online{position:absolute;bottom:25px;left:25px;font-size:13px}
+        .online{
+            position:absolute;
+            bottom:25px;
+            left:25px;
+            font-size:13px
+        }
+
         .online-dot{
-            display:inline-block;width:8px;height:8px;background:#5be39a;
-            border-radius:50%;margin-right:7px
+            display:inline-block;
+            width:8px;
+            height:8px;
+            background:#5be39a;
+            border-radius:50%;
+            margin-right:7px
         }
 
-        .main{margin-left:250px;padding:35px}
+        .main{
+            margin-left:250px;
+            padding:35px
+        }
 
         .topbar{
-            display:flex;justify-content:space-between;align-items:center;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
             margin-bottom:28px
         }
 
-        .topbar h1{color:#064d60;font-size:28px}
-        .topbar p{color:#45656d;margin-top:5px}
-
-        .profile{
-            background:rgba(255,255,255,.75);padding:10px 18px;
-            border-radius:14px;box-shadow:0 5px 20px rgba(0,0,0,.06)
+        .topbar h1{
+            color:#064d60;
+            font-size:28px
         }
 
-        .profile strong{display:block}
-        .profile span{font-size:12px;color:#789097}
+        .topbar p{
+            color:#45656d;
+            margin-top:5px
+        }
+
+        .profile{
+            background:rgba(255,255,255,.75);
+            padding:10px 18px;
+            border-radius:14px;
+            box-shadow:0 5px 20px rgba(0,0,0,.06)
+        }
+
+        .profile strong{
+            display:block
+        }
+
+        .profile span{
+            font-size:12px;
+            color:#789097
+        }
 
         .card{
-            background:rgba(255,255,255,.9);border-radius:18px;
-            padding:25px;margin-bottom:25px;
+            background:rgba(255,255,255,.9);
+            border-radius:18px;
+            padding:25px;
+            margin-bottom:25px;
             box-shadow:0 10px 30px rgba(6,77,96,.09)
         }
 
-        .form-grid{
-            display:grid;grid-template-columns:repeat(2,1fr);gap:18px
-        }
-
-        label{display:block;font-size:13px;font-weight:600;margin-bottom:7px}
-
-        input,select{
-            width:100%;padding:12px;border:1px solid #c9dfe2;
-            border-radius:9px;background:white;outline:none
-        }
-
         .invoice{
-            max-width:850px;margin:auto
+            max-width:850px;
+            margin:auto
         }
 
         .invoice-title{
-            text-align:center;color:#064d60;margin-bottom:25px
+            text-align:center;
+            color:#064d60;
+            margin-bottom:25px
         }
 
-        .invoice-title h2{font-size:23px}
+        .invoice-title h2{
+            font-size:23px
+        }
+
+        .invoice-title p{
+            margin-top:5px;
+            color:#789097;
+            font-size:13px
+        }
+
+        .form-grid{
+            display:grid;
+            grid-template-columns:repeat(2,1fr);
+            gap:18px
+        }
+
+        label{
+            display:block;
+            font-size:13px;
+            font-weight:600;
+            margin-bottom:7px
+        }
+
+        input{
+            width:100%;
+            padding:12px;
+            border:1px solid #c9dfe2;
+            border-radius:9px;
+            background:white;
+            outline:none;
+            font-size:14px
+        }
+
+        input:focus{
+            border-color:#087f8c
+        }
+
+        .readonly-box{
+            width:100%;
+            padding:12px;
+            border:1px solid #c9dfe2;
+            border-radius:9px;
+            background:#f5fbfc;
+            color:#45656d;
+            min-height:43px
+        }
 
         .invoice-line{
-            display:flex;justify-content:space-between;
-            padding:14px 0;border-bottom:1px solid #e5eeee
+            display:flex;
+            justify-content:space-between;
+            padding:14px 0;
+            border-bottom:1px solid #e5eeee
         }
 
         .total{
-            display:flex;justify-content:space-between;
-            font-size:20px;font-weight:700;color:#064d60;
+            display:flex;
+            justify-content:space-between;
+            font-size:20px;
+            font-weight:700;
+            color:#064d60;
             padding-top:20px
         }
 
-        .btn{
-            border:none;background:#075f70;color:white;padding:12px 20px;
-            border-radius:9px;cursor:pointer;font-weight:600
-        }
-
         .actions{
-            margin-top:25px;display:flex;justify-content:flex-end;gap:10px
+            margin-top:25px;
+            display:flex;
+            justify-content:flex-end;
+            gap:10px
         }
 
-        .secondary{background:#e6f3f5;color:#075f70}
+        .btn{
+            border:none;
+            background:#075f70;
+            color:white;
+            padding:12px 20px;
+            border-radius:9px;
+            cursor:pointer;
+            font-weight:600
+        }
+
+        .btn:hover{
+            background:#087f8c
+        }
+
+        .secondary{
+            background:#e6f3f5;
+            color:#075f70
+        }
+
+        .secondary:hover{
+            background:#d5edef
+        }
+
+        .message{
+            display:none;
+            padding:12px 15px;
+            margin-bottom:20px;
+            border-radius:9px;
+            font-size:13px;
+            font-weight:600;
+            background:#e8f7ef;
+            color:#2e9b73
+        }
+
+        .message.error{
+            background:#fdeaea;
+            color:#c94b4b
+        }
+
+        .records-card{
+            overflow-x:auto
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            margin-top:15px
+        }
+
+        th{
+            text-align:left;
+            padding:13px;
+            background:#064d60;
+            color:white;
+            font-size:12px
+        }
+
+        td{
+            padding:13px;
+            border-bottom:1px solid #e5eeee;
+            font-size:12px
+        }
+
+        tr:hover{
+            background:#f7fcfd
+        }
+
+        .print-btn{
+            border:none;
+            background:#e6f3f5;
+            color:#075f70;
+            padding:7px 12px;
+            border-radius:7px;
+            cursor:pointer;
+            font-weight:600
+        }
+
+        .print-btn:hover{
+            background:#d5edef
+        }
+
+        #printBill{
+            display:none
+        }
 
         @media(max-width:900px){
-            .sidebar{width:210px}.main{margin-left:210px}
-            .form-grid{grid-template-columns:1fr}
+
+            .sidebar{
+                width:210px
+            }
+
+            .main{
+                margin-left:210px
+            }
+
+            .form-grid{
+                grid-template-columns:1fr
+            }
         }
+
+        @media(max-width:650px){
+
+            .sidebar{
+                width:76px;
+                padding:20px 10px
+            }
+
+            .brand h2,
+            .brand span,
+            .menu-title,
+            .online{
+                display:none
+            }
+
+            .brand{
+                justify-content:center
+            }
+
+            .nav a{
+                text-align:center
+            }
+
+            .main{
+                margin-left:76px;
+                padding:20px
+            }
+
+            .profile{
+                display:none
+            }
+        }
+
+        @media print{
+
+            body{
+                background:white
+            }
+
+            .sidebar,
+            .topbar,
+            .card,
+            .message{
+                display:none !important
+            }
+
+            .main{
+                margin:0;
+                padding:0
+            }
+
+            #printBill{
+                display:block !important
+            }
+        }
+
     </style>
+
 </head>
 
+
 <body>
+
 
 <aside class="sidebar">
 
     <div class="brand">
-        <div class="brand-icon">🦷</div>
-        <div>
-            <h2>Sunrise Dental</h2>
-            <span>Clinic Management System</span>
+
+        <div class="brand-icon">
+            🦷
         </div>
+
+        <div>
+
+            <h2>
+                Sunrise Dental
+            </h2>
+
+            <span>
+                Clinic Management System
+            </span>
+
+        </div>
+
     </div>
 
-    <div class="menu-title">MAIN MENU</div>
+
+    <div class="menu-title">
+        MAIN MENU
+    </div>
+
 
     <nav class="nav">
-        <a href="dashboard.html">▣ Dashboard</a>
-        <a href="patients.html">♙ Patients</a>
-        <a href="appointments.html">▣ Appointments</a>
-        <a href="dentists.html">♙ Dentists</a>
-        <a href="treatments.html">▣ Treatments</a>
-        <a class="active" href="billing.html">▣ Billing</a>
-        <a href="help.html">❓ Help</a>
-        <a href="logout">↪ Logout</a>
+
+        <a href="dashboard.html">
+            ▣ Dashboard
+        </a>
+
+        <a href="appointments.html">
+            ▣ Appointments
+        </a>
+
+        <a href="dentists.html">
+            ♙ Dentists
+        </a>
+
+        <a href="treatments.html">
+            ▣ Treatments
+        </a>
+
+        <a class="active" href="billing.html">
+            ▣ Billing
+        </a>
+
+        <a href="help.html">
+            ❓ Help
+        </a>
+
+        <a href="logout">
+            ↪ Logout
+        </a>
+
     </nav>
 
+
     <div class="online">
-        <span class="online-dot"></span>System Online
+
+        <span class="online-dot"></span>
+        System Online
+
     </div>
 
 </aside>
 
+
 <main class="main">
 
+
     <div class="topbar">
+
         <div>
-            <h1>Billing</h1>
-            <p>Create, calculate and print patient bills.</p>
+
+            <h1>
+                Billing
+            </h1>
+
+            <p>
+                Create, calculate and print patient bills.
+            </p>
+
         </div>
 
+
         <div class="profile">
-            <strong>Admin User</strong>
-            <span>Administrator</span>
+
+            <strong>
+                Admin User
+            </strong>
+
+            <span>
+                Administrator
+            </span>
+
         </div>
+
     </div>
+
+
+    <div id="message"
+         class="message">
+    </div>
+
 
     <section class="card">
 
         <div class="invoice">
 
+
             <div class="invoice-title">
-                <h2>Create Patient Bill</h2>
-                <p>Sunrise Dental Clinic</p>
-            </div>
 
-            <div class="form-grid">
+                <h2>
+                    Create Patient Bill
+                </h2>
 
-                <div>
-                    <label>Patient</label>
-                    <select>
-                        <option>Select patient</option>
-                        <option>Amelia Silva</option>
-                        <option>Ryan James</option>
-                        <option>Noah Kumar</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label>Appointment Number</label>
-                    <input type="text" placeholder="Enter appointment number">
-                </div>
-
-                <div>
-                    <label>Treatment</label>
-                    <select>
-                        <option>Select treatment</option>
-                        <option>Routine Dental Check-up</option>
-                        <option>Teeth Cleaning</option>
-                        <option>Root Canal Treatment</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label>Consultation Fee</label>
-                    <input type="number" value="2500">
-                </div>
-
-                <div>
-                    <label>Treatment Cost</label>
-                    <input type="number" value="4500">
-                </div>
+                <p>
+                    Sunrise Dental Clinic
+                </p>
 
             </div>
 
-            <div style="margin-top:30px">
 
-                <div class="invoice-line">
-                    <span>Treatment Cost</span>
-                    <strong>LKR 4,500.00</strong>
+            <form id="billForm">
+
+
+                <div class="form-grid">
+
+
+                    <div>
+
+                        <label>
+                            Appointment Number
+                        </label>
+
+                        <input
+                                type="text"
+                                id="appointmentNumber"
+                                placeholder="Enter appointment number"
+                                required
+                        >
+
+                    </div>
+
+
+                    <div style="
+                        display:flex;
+                        align-items:flex-end;
+                    ">
+
+                        <button
+                                class="btn"
+                                type="button"
+                                onclick="loadAppointment()"
+                                style="width:100%;">
+
+                            Load Appointment
+
+                        </button>
+
+                    </div>
+
+
+                    <div>
+
+                        <label>
+                            Dentist
+                        </label>
+
+                        <div
+                                id="dentistName"
+                                class="readonly-box">
+
+                            Enter an appointment number.
+
+                        </div>
+
+                    </div>
+
+
+                    <div>
+
+                        <label>
+                            Treatment
+                        </label>
+
+                        <div
+                                id="treatmentName"
+                                class="readonly-box">
+
+                            Enter an appointment number.
+
+                        </div>
+
+                    </div>
+
+
+                    <div>
+
+                        <label>
+                            Treatment Cost
+                        </label>
+
+                        <input
+                                type="number"
+                                id="treatmentCost"
+                                min="0"
+                                step="0.01"
+                                placeholder="Enter treatment cost"
+                                required
+                        >
+
+                    </div>
+
+
+                    <div>
+
+                        <label>
+                            Consultation Fee
+                        </label>
+
+                        <input
+                                type="number"
+                                id="consultationFee"
+                                min="0"
+                                step="0.01"
+                                placeholder="Enter consultation fee"
+                                required
+                        >
+
+                    </div>
+
+
                 </div>
 
-                <div class="invoice-line">
-                    <span>Consultation Fee</span>
-                    <strong>LKR 2,500.00</strong>
+
+                <div style="margin-top:30px">
+
+
+                    <div class="invoice-line">
+
+                        <span>
+                            Treatment Cost
+                        </span>
+
+                        <strong id="displayTreatment">
+                            LKR 0.00
+                        </strong>
+
+                    </div>
+
+
+                    <div class="invoice-line">
+
+                        <span>
+                            Consultation Fee
+                        </span>
+
+                        <strong id="displayConsultation">
+                            LKR 0.00
+                        </strong>
+
+                    </div>
+
+
+                    <div class="total">
+
+                        <span>
+                            Total
+                        </span>
+
+                        <span id="displayTotal">
+                            LKR 0.00
+                        </span>
+
+                    </div>
+
+
                 </div>
 
-                <div class="total">
-                    <span>Total</span>
-                    <span>LKR 7,000.00</span>
+
+                <div class="actions">
+
+
+                    <button
+                            class="btn secondary"
+                            type="button"
+                            onclick="clearForm()">
+
+                        Clear
+
+                    </button>
+
+
+                    <button
+                            class="btn"
+                            type="submit">
+
+                        Generate Bill
+
+                    </button>
+
+
                 </div>
 
-            </div>
 
-            <div class="actions">
-                <button class="btn secondary" type="button">Clear</button>
-                <button class="btn" type="button" onclick="window.print()">🖨 Print Bill</button>
-            </div>
+            </form>
 
         </div>
 
     </section>
 
+
+    <section class="card records-card">
+
+        <div class="invoice-title">
+
+            <h2>
+                Bill Records
+            </h2>
+
+            <p>
+                Previously generated bills
+            </p>
+
+        </div>
+
+
+        <table>
+
+            <thead>
+
+            <tr>
+
+                <th>Bill ID</th>
+                <th>Appointment No.</th>
+                <th>Dentist</th>
+                <th>Treatment</th>
+                <th>Treatment Cost</th>
+                <th>Consultation Fee</th>
+                <th>Total</th>
+                <th>Action</th>
+
+            </tr>
+
+            </thead>
+
+
+            <tbody id="billTableBody">
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+
+    <section id="printBill">
+
+        <div style="
+            max-width:700px;
+            margin:40px auto;
+            font-family:Arial,sans-serif;
+            color:#222;
+        ">
+
+            <div style="
+                text-align:center;
+                border-bottom:2px solid #064d60;
+                padding-bottom:20px;
+                margin-bottom:25px;
+            ">
+
+                <h1>
+                    SUNRISE DENTAL CLINIC
+                </h1>
+
+                <p>
+                    Patient Bill / Receipt
+                </p>
+
+            </div>
+
+
+            <p>
+                <strong>Bill ID:</strong>
+                <span id="printBillId"></span>
+            </p>
+
+            <p>
+                <strong>Appointment Number:</strong>
+                <span id="printAppointment"></span>
+            </p>
+
+            <p>
+                <strong>Dentist:</strong>
+                <span id="printDentist"></span>
+            </p>
+
+            <p>
+                <strong>Treatment:</strong>
+                <span id="printTreatment"></span>
+            </p>
+
+
+            <br>
+
+
+            <div style="
+                border-top:1px solid #ccc;
+                padding-top:15px;
+            ">
+
+                <p style="
+                    display:flex;
+                    justify-content:space-between;
+                    padding:8px 0;
+                ">
+
+                    <span>
+                        Treatment Cost
+                    </span>
+
+                    <strong id="printTreatmentCost"></strong>
+
+                </p>
+
+
+                <p style="
+                    display:flex;
+                    justify-content:space-between;
+                    padding:8px 0;
+                ">
+
+                    <span>
+                        Consultation Fee
+                    </span>
+
+                    <strong id="printConsultation"></strong>
+
+                </p>
+
+
+                <p style="
+                    display:flex;
+                    justify-content:space-between;
+                    padding:15px 0;
+                    border-top:2px solid #064d60;
+                    font-size:20px;
+                ">
+
+                    <strong>
+                        TOTAL
+                    </strong>
+
+                    <strong id="printTotal"></strong>
+
+                </p>
+
+            </div>
+
+
+            <p style="
+                text-align:center;
+                margin-top:40px;
+            ">
+
+                Thank you for visiting Sunrise Dental Clinic.
+
+            </p>
+
+        </div>
+
+    </section>
+
+
 </main>
 
+
+<script>
+
+    const treatmentCost =
+        document.getElementById(
+            "treatmentCost"
+        );
+
+
+    const consultationFee =
+        document.getElementById(
+            "consultationFee"
+        );
+
+
+    const displayTreatment =
+        document.getElementById(
+            "displayTreatment"
+        );
+
+
+    const displayConsultation =
+        document.getElementById(
+            "displayConsultation"
+        );
+
+
+    const displayTotal =
+        document.getElementById(
+            "displayTotal"
+        );
+
+
+    let appointmentLoaded = false;
+
+
+    function formatCurrency(amount) {
+
+        return "LKR " +
+            Number(amount).toLocaleString(
+                "en-LK",
+                {
+                    minimumFractionDigits:2,
+                    maximumFractionDigits:2
+                }
+            );
+    }
+
+
+    function calculateTotal() {
+
+        const treatment =
+            parseFloat(
+                treatmentCost.value
+            ) || 0;
+
+
+        const consultation =
+            parseFloat(
+                consultationFee.value
+            ) || 0;
+
+
+        const total =
+            treatment + consultation;
+
+
+        displayTreatment.textContent =
+            formatCurrency(treatment);
+
+
+        displayConsultation.textContent =
+            formatCurrency(consultation);
+
+
+        displayTotal.textContent =
+            formatCurrency(total);
+    }
+
+
+    treatmentCost.addEventListener(
+        "input",
+        calculateTotal
+    );
+
+
+    consultationFee.addEventListener(
+        "input",
+        calculateTotal
+    );
+
+
+    function loadAppointment() {
+
+        const appointmentNumber =
+            document.getElementById(
+                "appointmentNumber"
+            ).value.trim();
+
+
+        if (!appointmentNumber) {
+
+            showMessage(
+                "Please enter an appointment number.",
+                true
+            );
+
+            return;
+        }
+
+
+        fetch(
+            "billing?appointmentNumber=" +
+            encodeURIComponent(
+                appointmentNumber
+            )
+        )
+
+            .then(response => {
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Appointment not found"
+                    );
+                }
+
+                return response.json();
+
+            })
+
+            .then(appointment => {
+
+                document.getElementById(
+                    "dentistName"
+                ).textContent =
+                    appointment.dentistName;
+
+
+                document.getElementById(
+                    "treatmentName"
+                ).textContent =
+                    appointment.treatmentName;
+
+
+                appointmentLoaded = true;
+
+
+                showMessage(
+                    "Appointment loaded successfully."
+                );
+
+            })
+
+            .catch(error => {
+
+                console.error(error);
+
+
+                document.getElementById(
+                    "dentistName"
+                ).textContent =
+                    "Appointment not found.";
+
+
+                document.getElementById(
+                    "treatmentName"
+                ).textContent =
+                    "Appointment not found.";
+
+
+                appointmentLoaded = false;
+
+
+                showMessage(
+                    "Appointment not found. Please check the appointment number.",
+                    true
+                );
+
+            });
+    }
+
+
+    function clearForm() {
+
+        document.getElementById(
+            "billForm"
+        ).reset();
+
+
+        document.getElementById(
+            "dentistName"
+        ).textContent =
+            "Enter an appointment number.";
+
+
+        document.getElementById(
+            "treatmentName"
+        ).textContent =
+            "Enter an appointment number.";
+
+
+        appointmentLoaded = false;
+
+
+        calculateTotal();
+    }
+
+
+    function showMessage(
+        text,
+        error = false) {
+
+        const message =
+            document.getElementById(
+                "message"
+            );
+
+
+        message.textContent =
+            text;
+
+
+        message.classList.toggle(
+            "error",
+            error
+        );
+
+
+        message.style.display =
+            "block";
+
+
+        setTimeout(() => {
+
+            message.style.display =
+                "none";
+
+        }, 4000);
+    }
+
+
+    document.getElementById(
+        "billForm"
+    ).addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
+
+
+            const appointmentNumber =
+                document.getElementById(
+                    "appointmentNumber"
+                ).value.trim();
+
+
+            const treatmentCostValue =
+                treatmentCost.value;
+
+
+            const consultationFeeValue =
+                consultationFee.value;
+
+
+            if (!appointmentLoaded) {
+
+                showMessage(
+                    "Please load a valid appointment first.",
+                    true
+                );
+
+                return;
+            }
+
+
+            if (
+                !appointmentNumber ||
+                !treatmentCostValue ||
+                !consultationFeeValue
+            ) {
+
+                showMessage(
+                    "Please complete all billing fields.",
+                    true
+                );
+
+                return;
+            }
+
+
+            const formData =
+                new URLSearchParams();
+
+
+            formData.append(
+                "appointmentNumber",
+                appointmentNumber
+            );
+
+
+            formData.append(
+                "treatmentCost",
+                treatmentCostValue
+            );
+
+
+            formData.append(
+                "consultationFee",
+                consultationFeeValue
+            );
+
+
+            fetch(
+                "billing",
+                {
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                            "application/x-www-form-urlencoded"
+                    },
+
+                    body:formData
+                }
+            )
+
+                .then(response =>
+                    response.json()
+                )
+
+                .then(result => {
+
+                    if (result.success) {
+
+                        showMessage(
+                            "Bill generated successfully."
+                        );
+
+                        clearForm();
+
+                        loadBills();
+
+                    } else {
+
+                        showMessage(
+                            result.error ||
+                            "Unable to generate bill.",
+                            true
+                        );
+
+                    }
+
+                })
+
+                .catch(error => {
+
+                    console.error(error);
+
+                    showMessage(
+                        "Unable to generate bill.",
+                        true
+                    );
+
+                });
+
+        }
+    );
+
+
+    function loadBills() {
+
+        fetch("billing")
+
+            .then(response => {
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Unable to load bill records"
+                    );
+
+                }
+
+                return response.json();
+
+            })
+
+            .then(bills => {
+
+                const tableBody =
+                    document.getElementById(
+                        "billTableBody"
+                    );
+
+
+                tableBody.innerHTML = "";
+
+
+                if (bills.length === 0) {
+
+                    tableBody.innerHTML = `
+                            <tr>
+                                <td colspan="8"
+                                    style="text-align:center;padding:25px">
+                                    No bill records found.
+                                </td>
+                            </tr>
+                        `;
+
+                    return;
+                }
+
+
+                bills.forEach(
+                    bill => {
+
+                        const row =
+                            document.createElement(
+                                "tr"
+                            );
+
+
+                        row.innerHTML = `
+
+                                    <td>
+                                        ${bill.billId}
+                                    </td>
+
+                                    <td>
+                                        ${bill.appointmentNumber}
+                                    </td>
+
+                                    <td>
+                                        ${bill.dentistName}
+                                    </td>
+
+                                    <td>
+                                        ${bill.treatmentName}
+                                    </td>
+
+                                    <td>
+                                        ${formatCurrency(
+                            bill.treatmentCost
+                        )}
+                                    </td>
+
+                                    <td>
+                                        ${formatCurrency(
+                            bill.consultationFee
+                        )}
+                                    </td>
+
+                                    <td>
+                                        <strong>
+                                            ${formatCurrency(
+                            bill.totalAmount
+                        )}
+                                        </strong>
+                                    </td>
+
+                                    <td>
+
+                                        <button
+                                                class="print-btn"
+                                                onclick="printBill(
+                                                    ${bill.billId},
+                                                    '${escapeForJs(
+                            bill.appointmentNumber
+                        )}',
+                                                    '${escapeForJs(
+                            bill.dentistName
+                        )}',
+                                                    '${escapeForJs(
+                            bill.treatmentName
+                        )}',
+                                                    ${bill.treatmentCost},
+                                                    ${bill.consultationFee},
+                                                    ${bill.totalAmount}
+                                                )">
+
+                                            🖨 Print
+
+                                        </button>
+
+                                    </td>
+
+                                `;
+
+
+                        tableBody.appendChild(
+                            row
+                        );
+
+                    }
+                );
+
+            })
+
+            .catch(error => {
+
+                console.error(error);
+
+            });
+    }
+
+
+    function escapeForJs(value) {
+
+        if (!value) {
+            return "";
+        }
+
+        return String(value)
+            .replace(/\\/g, "\\\\")
+            .replace(/'/g, "\\'");
+    }
+
+
+    function printBill(
+        billId,
+        appointmentNumber,
+        dentist,
+        treatment,
+        treatmentCost,
+        consultationFee,
+        totalAmount) {
+
+
+        document.getElementById(
+            "printBillId"
+        ).textContent =
+            billId;
+
+
+        document.getElementById(
+            "printAppointment"
+        ).textContent =
+            appointmentNumber;
+
+
+        document.getElementById(
+            "printDentist"
+        ).textContent =
+            dentist;
+
+
+        document.getElementById(
+            "printTreatment"
+        ).textContent =
+            treatment;
+
+
+        document.getElementById(
+            "printTreatmentCost"
+        ).textContent =
+            formatCurrency(
+                treatmentCost
+            );
+
+
+        document.getElementById(
+            "printConsultation"
+        ).textContent =
+            formatCurrency(
+                consultationFee
+            );
+
+
+        document.getElementById(
+            "printTotal"
+        ).textContent =
+            formatCurrency(
+                totalAmount
+            );
+
+
+        window.print();
+    }
+
+
+    loadBills();
+
+    calculateTotal();
+
+</script>
+
+
 </body>
+
 </html>

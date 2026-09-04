@@ -4,9 +4,9 @@ import org.example.model.Bill;
 
 public class ReceiptGenerator {
 
-    public String generateReceipt(Bill bill, Payment payment) {
+    public String generateReceipt(Bill bill) {
 
-        if (bill == null || payment == null) {
+        if (bill == null) {
             return "Unable to generate receipt.";
         }
 
@@ -15,7 +15,7 @@ public class ReceiptGenerator {
         receipt.append("\n");
         receipt.append("========================================\n");
         receipt.append("        SUNRISE DENTAL CLINIC\n");
-        receipt.append("             PAYMENT RECEIPT\n");
+        receipt.append("             BILL RECEIPT\n");
         receipt.append("========================================\n");
 
         receipt.append(String.format(
@@ -24,8 +24,18 @@ public class ReceiptGenerator {
         ));
 
         receipt.append(String.format(
-                "Appointment ID   : %d%n",
-                bill.getAppointmentId()
+                "Appointment No.  : %s%n",
+                bill.getAppointmentNumber()
+        ));
+
+        receipt.append(String.format(
+                "Dentist          : %s%n",
+                bill.getDentistName()
+        ));
+
+        receipt.append(String.format(
+                "Treatment        : %s%n",
+                bill.getTreatmentName()
         ));
 
         receipt.append("----------------------------------------\n");
@@ -40,26 +50,11 @@ public class ReceiptGenerator {
                 bill.getConsultationFee()
         ));
 
-        receipt.append(String.format(
-                "Total Bill       : LKR %.2f%n",
-                bill.getTotalAmount()
-        ));
-
         receipt.append("----------------------------------------\n");
 
         receipt.append(String.format(
-                "Payment Amount   : LKR %.2f%n",
-                payment.getPaymentAmount()
-        ));
-
-        receipt.append(String.format(
-                "Payment Method   : %s%n",
-                payment.getPaymentMethod()
-        ));
-
-        receipt.append(String.format(
-                "Payment Date     : %s%n",
-                payment.getPaymentDate()
+                "TOTAL BILL       : LKR %.2f%n",
+                bill.getTotalAmount()
         ));
 
         receipt.append("========================================\n");
