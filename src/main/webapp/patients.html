@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patients | Sunrise Dental Clinic</title>
+
+    ```
+    <style>
+        :root {
+            --primary-dark: #064d60;
+            --primary: #075f70;
+            --primary-light: #087f8c;
+            --accent: #8ee9ef;
+
+            --background-1: #c9f3f5;
+            --background-2: #b9e7f0;
+            --background-3: #e9f8fa;
+            --background-4: #f7fcfd;
+
+            --white: #ffffff;
+            --text-dark: #16343b;
+            --text-medium: #45656d;
+            --text-light: #789097;
+
+            --success: #2e9b73;
+            --danger: #d95c5c;
+
+            --shadow: 0 12px 35px rgba(6, 77, 96, 0.10);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, var(--background-1), var(--background-4));
+            color: var(--text-dark);
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: linear-gradient(180deg, var(--primary-dark), var(--primary));
+            color: white;
+            padding: 28px 18px;
+            z-index: 100;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0 12px 28px;
+            border-bottom: 1px solid rgba(255,255,255,0.12);
+        }
+
+        .brand-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 13px;
+            background: rgba(142, 233, 239, 0.18);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+
+        .brand h1 {
+            font-size: 18px;
+            line-height: 1.2;
+        }
+
+        .brand p {
+            font-size: 11px;
+            opacity: 0.7;
+            margin-top: 3px;
+        }
+
+        .menu-title {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            opacity: 0.55;
+            margin: 28px 12px 10px;
+        }
+
+        .nav {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .nav a {
+            color: rgba(255,255,255,0.75);
+            text-decoration: none;
+            padding: 12px 13px;
+            border-radius: 11px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            transition: 0.2s ease;
+        }
+
+        .nav a:hover {
+            background: rgba(255,255,255,0.09);
+            color: white;
+        }
+
+        .nav a.active {
+            background: rgba(142,233,239,0.16);
+            color: white;
+            box-shadow: inset 3px 0 0 var(--accent);
+        }
+
+        .nav-icon {
+            width: 22px;
+            text-align: center;
+            font-size: 17px;
+        }
+
+        .system-status {
+            position: absolute;
+            bottom: 25px;
+            left: 30px;
+            right: 30px;
+            padding: 12px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.07);
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #62d6a3;
+            border-radius: 50%;
+        }
+
+        /* MAIN */
+
+        .main {
+            margin-left: 250px;
+            min-height: 100vh;
+            padding: 34px 40px;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .page-title h2 {
+            font-size: 29px;
+            margin-bottom: 6px;
+        }
+
+        .page-title p {
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            background: rgba(255,255,255,0.75);
+            padding: 8px 14px 8px 8px;
+            border-radius: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .profile-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary-dark));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .profile strong {
+            font-size: 13px;
+        }
+
+        .profile span {
+            display: block;
+            color: var(--text-light);
+            font-size: 11px;
+            margin-top: 2px;
+        }
+
+        /* CARD */
+
+        .card {
+            background: rgba(255,255,255,0.9);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255,255,255,0.8);
+        }
+
+        .card-header {
+            padding: 24px 26px 18px;
+            border-bottom: 1px solid #edf3f4;
+        }
+
+        .card-header h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .card-header p {
+            color: var(--text-light);
+            font-size: 13px;
+        }
+
+        /* FORM */
+
+        .form-card {
+            margin-bottom: 25px;
+        }
+
+        form {
+            padding: 25px 26px 28px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-medium);
+        }
+
+        label span {
+            color: var(--danger);
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            border: 1px solid #dce9eb;
+            border-radius: 11px;
+            padding: 13px 14px;
+            font-family: inherit;
+            font-size: 14px;
+            color: var(--text-dark);
+            background: #fbfeff;
+            outline: none;
+            transition: 0.2s ease;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(8,127,140,0.10);
+            background: white;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #aab9bd;
+        }
+
+        .form-actions {
+            margin-top: 24px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            border: none;
+            border-radius: 11px;
+            padding: 12px 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .btn-primary {
+            color: white;
+            background: linear-gradient(135deg, #078a99, #066b7a);
+            box-shadow: 0 7px 18px rgba(6,107,122,0.18);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 9px 22px rgba(6,107,122,0.25);
+        }
+
+        .btn-secondary {
+            color: var(--text-medium);
+            background: #edf6f7;
+        }
+
+        .btn-secondary:hover {
+            background: #e2f0f2;
+        }
+
+        /* MESSAGES */
+
+        .message {
+            margin: 0 26px 20px;
+            padding: 13px 15px;
+            border-radius: 11px;
+            font-size: 13px;
+            display: none;
+        }
+
+        .message.success {
+            background: #e8f7f0;
+            color: #247a5a;
+            border: 1px solid #ccecdf;
+        }
+
+        .message.error {
+            background: #fff0f0;
+            color: #a94747;
+            border: 1px solid #f3d1d1;
+        }
+
+        /* INFO */
+
+        .info-box {
+            margin-top: 20px;
+            padding: 13px 15px;
+            background: #eef9fa;
+            border-left: 4px solid var(--primary-light);
+            border-radius: 8px;
+            color: var(--text-medium);
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 900px) {
+            .sidebar {
+                width: 210px;
+            }
+
+            .main {
+                margin-left: 210px;
+                padding: 25px;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+
+            .system-status {
+                display: none;
+            }
+
+            .main {
+                margin-left: 0;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            .topbar {
+                align-items: flex-start;
+                gap: 20px;
+                flex-direction: column;
+            }
+        }
+    </style>
+    ```
+
+</head>
+
+<body>
+
+<aside class="sidebar">
+
+    ```
+    <div class="brand">
+        <div class="brand-icon">🦷</div>
+        <div>
+            <h1>Sunrise Dental</h1>
+            <p>Clinic Management System</p>
+        </div>
+    </div>
+
+    <div class="menu-title">Main Menu</div>
+
+    <nav class="nav">
+        <a href="dashboard.html">
+            <span class="nav-icon">⌂</span>
+            Dashboard
+        </a>
+
+        <a href="patients.html" class="active">
+            <span class="nav-icon">♙</span>
+            Patients
+        </a>
+
+        <a href="appointments.html">
+            <span class="nav-icon">▣</span>
+            Appointments
+        </a>
+
+        <a href="dentists.html">
+            <span class="nav-icon">♟</span>
+            Dentists
+        </a>
+
+        <a href="treatments.html">
+            <span class="nav-icon">✚</span>
+            Treatments
+        </a>
+
+        <a href="billing.html">
+            <span class="nav-icon">▤</span>
+            Billing
+        </a>
+
+        <a href="reports.html">
+            <span class="nav-icon">▥</span>
+            Reports
+        </a>
+
+        <a href="settings.html">
+            <span class="nav-icon">⚙</span>
+            Settings
+        </a>
+    </nav>
+
+    <div class="system-status">
+        <span class="status-dot"></span>
+        System Online
+    </div>
+    ```
+
+</aside>
+
+<main class="main">
+
+    ```
+    <div class="topbar">
+
+        <div class="page-title">
+            <h2>Patients</h2>
+            <p>Register and manage patient records</p>
+        </div>
+
+        <div class="profile">
+            <div class="profile-avatar">AD</div>
+            <div>
+                <strong>Admin User</strong>
+                <span>Administrator</span>
+            </div>
+        </div>
+
+    </div>
+
+
+    <section class="card form-card">
+
+        <div class="card-header">
+            <h3>Register New Patient</h3>
+            <p>Enter the patient's details to create a new patient record.</p>
+        </div>
+
+        <div id="successMessage" class="message success">
+            Patient registered successfully.
+        </div>
+
+        <div id="errorMessage" class="message error">
+            Please complete all required fields.
+        </div>
+
+        <form id="patientForm" action="patients" method="post">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label for="patientName">
+                        Patient Name <span>*</span>
+                    </label>
+
+                    <input
+                            type="text"
+                            id="patientName"
+                            name="patientName"
+                            placeholder="Enter patient's full name"
+                            maxlength="100"
+                            required>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="contactNumber">
+                        Contact Number <span>*</span>
+                    </label>
+
+                    <input
+                            type="tel"
+                            id="contactNumber"
+                            name="contactNumber"
+                            placeholder="Enter contact number"
+                            maxlength="20"
+                            pattern="[0-9+\-\s]{7,20}"
+                            required>
+                </div>
+
+
+                <div class="form-group full">
+                    <label for="address">
+                        Address <span>*</span>
+                    </label>
+
+                    <textarea
+                            id="address"
+                            name="address"
+                            placeholder="Enter patient's full address"
+                            maxlength="255"
+                            required></textarea>
+                </div>
+
+            </div>
+
+
+            <div class="info-box">
+                <strong>Note:</strong>
+                The patient ID will be automatically generated by the database after successful registration.
+            </div>
+
+
+            <div class="form-actions">
+
+                <button type="submit" class="btn btn-primary">
+                    + Register Patient
+                </button>
+
+                <button type="reset" class="btn btn-secondary">
+                    Clear Form
+                </button>
+
+            </div>
+
+        </form>
+
+    </section>
+
+
+    <section class="card">
+
+        <div class="card-header">
+            <h3>Patient Records</h3>
+            <p>Registered patients will appear here.</p>
+        </div>
+
+        <div style="padding: 30px; text-align: center; color: #789097; font-size: 13px;">
+            Patient records will be displayed here once the patient database listing is connected.
+        </div>
+
+    </section>
+    ```
+
+</main>
+
+<script>
+    const form = document.getElementById("patientForm");
+    const successMessage = document.getElementById("successMessage");
+    const errorMessage = document.getElementById("errorMessage");
+
+    form.addEventListener("submit", function (event) {
+
+        successMessage.style.display = "none";
+        errorMessage.style.display = "none";
+
+        const name = document.getElementById("patientName").value.trim();
+        const address = document.getElementById("address").value.trim();
+        const contact = document.getElementById("contactNumber").value.trim();
+
+        if (!name || !address || !contact) {
+            event.preventDefault();
+
+            errorMessage.textContent =
+                "Please complete all required fields before registering the patient.";
+
+            errorMessage.style.display = "block";
+        }
+
+    });
+</script>
+
+</body>
+</html>

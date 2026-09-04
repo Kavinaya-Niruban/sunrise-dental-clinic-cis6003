@@ -1,0 +1,427 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointments | Sunrise Dental Clinic</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #c9f3f5, #e9f8fa, #b9e7f0);
+            color: #16343b;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: #064d60;
+            color: white;
+            padding: 28px 18px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+
+        .brand-icon {
+            font-size: 32px;
+        }
+
+        .brand h2 {
+            font-size: 19px;
+        }
+
+        .brand span {
+            display: block;
+            font-size: 11px;
+            opacity: .7;
+            margin-top: 3px;
+        }
+
+        .menu-title {
+            font-size: 11px;
+            opacity: .6;
+            margin: 20px 12px 10px;
+            letter-spacing: 1px;
+        }
+
+        .nav a {
+            display: block;
+            text-decoration: none;
+            color: white;
+            padding: 12px 14px;
+            border-radius: 10px;
+            margin-bottom: 5px;
+            font-size: 14px;
+            transition: .2s;
+        }
+
+        .nav a:hover,
+        .nav a.active {
+            background: #087f8c;
+        }
+
+        .online {
+            position: absolute;
+            bottom: 25px;
+            left: 25px;
+            font-size: 13px;
+        }
+
+        .online-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #5be39a;
+            border-radius: 50%;
+            margin-right: 7px;
+        }
+
+        .main {
+            margin-left: 250px;
+            padding: 35px;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+        }
+
+        .topbar h1 {
+            color: #064d60;
+            font-size: 28px;
+        }
+
+        .topbar p {
+            color: #45656d;
+            margin-top: 5px;
+        }
+
+        .profile {
+            background: rgba(255,255,255,.75);
+            padding: 10px 18px;
+            border-radius: 14px;
+            box-shadow: 0 5px 20px rgba(0,0,0,.06);
+        }
+
+        .profile strong {
+            display: block;
+        }
+
+        .profile span {
+            font-size: 12px;
+            color: #789097;
+        }
+
+        .card {
+            background: rgba(255,255,255,.82);
+            border-radius: 18px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(6,77,96,.09);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 22px;
+        }
+
+        .card-header h2 {
+            font-size: 19px;
+            color: #064d60;
+        }
+
+        .btn {
+            border: none;
+            background: #075f70;
+            color: white;
+            padding: 11px 18px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .btn:hover {
+            background: #087f8c;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #c9dfe2;
+            border-radius: 9px;
+            background: white;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #087f8c;
+        }
+
+        .form-actions {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-secondary {
+            background: #e6f3f5;
+            color: #075f70;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 13px;
+            background: #e8f6f7;
+            color: #45656d;
+            font-size: 12px;
+        }
+
+        td {
+            padding: 15px 13px;
+            border-bottom: 1px solid #e5eeee;
+            font-size: 13px;
+        }
+
+        .status {
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .confirmed {
+            background: #dff5eb;
+            color: #2e9b73;
+        }
+
+        .pending {
+            background: #fff0d5;
+            color: #b47716;
+        }
+
+        .cancelled {
+            background: #fbe3e3;
+            color: #c24d4d;
+        }
+
+        @media(max-width: 900px) {
+            .sidebar {
+                width: 210px;
+            }
+
+            .main {
+                margin-left: 210px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<aside class="sidebar">
+    <div class="brand">
+        <div class="brand-icon">🦷</div>
+        <div>
+            <h2>Sunrise Dental</h2>
+            <span>Clinic Management System</span>
+        </div>
+    </div>
+
+    <div class="menu-title">MAIN MENU</div>
+
+    <nav class="nav">
+        <a href="dashboard.html">▣ Dashboard</a>
+        <a href="patients.html">♙ Patients</a>
+        <a class="active" href="appointments.html">▣ Appointments</a>
+        <a href="dentists.html">♙ Dentists</a>
+        <a href="treatments.html">▣ Treatments</a>
+        <a href="billing.html">▣ Billing</a>
+        <a href="reports.html">▤ Reports</a>
+        <a href="settings.html">⚙ Settings</a>
+    </nav>
+
+    <div class="online">
+        <span class="online-dot"></span>System Online
+    </div>
+</aside>
+
+<main class="main">
+
+    <div class="topbar">
+        <div>
+            <h1>Appointments</h1>
+            <p>Manage patient appointments and schedules.</p>
+        </div>
+
+        <div class="profile">
+            <strong>Admin User</strong>
+            <span>Administrator</span>
+        </div>
+    </div>
+
+    <section class="card">
+        <div class="card-header">
+            <h2>Register New Appointment</h2>
+        </div>
+
+        <form>
+            <div class="form-grid">
+
+                <div>
+                    <label>Patient Name</label>
+                    <input type="text" placeholder="Enter patient name" required>
+                </div>
+
+                <div>
+                    <label>Dentist</label>
+                    <select required>
+                        <option value="">Select dentist</option>
+                        <option>Dr. Sarah Perera</option>
+                        <option>Dr. Michael Silva</option>
+                        <option>Dr. Emily Fernando</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Treatment</label>
+                    <select required>
+                        <option value="">Select treatment</option>
+                        <option>Routine Dental Check-up</option>
+                        <option>Teeth Cleaning</option>
+                        <option>Dental Consultation</option>
+                        <option>Root Canal Treatment</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Appointment Date</label>
+                    <input type="date" required>
+                </div>
+
+                <div>
+                    <label>Appointment Time</label>
+                    <input type="time" required>
+                </div>
+
+                <div>
+                    <label>Status</label>
+                    <select>
+                        <option>Confirmed</option>
+                        <option>Pending</option>
+                        <option>Cancelled</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="form-actions">
+                <button class="btn" type="submit">+ Register Appointment</button>
+                <button class="btn btn-secondary" type="reset">Clear</button>
+            </div>
+        </form>
+    </section>
+
+    <section class="card">
+
+        <div class="card-header">
+            <h2>Today's Appointments</h2>
+            <input style="width:220px" type="search" placeholder="Search appointment...">
+        </div>
+
+        <table>
+            <thead>
+            <tr>
+                <th>Time</th>
+                <th>Patient</th>
+                <th>Dentist</th>
+                <th>Treatment</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+                <td>09:00</td>
+                <td>Amelia Silva</td>
+                <td>Dr. Sarah Perera</td>
+                <td>Routine Dental Check-up</td>
+                <td><span class="status confirmed">Confirmed</span></td>
+            </tr>
+
+            <tr>
+                <td>10:30</td>
+                <td>Ryan James</td>
+                <td>Dr. Michael Silva</td>
+                <td>Teeth Cleaning</td>
+                <td><span class="status confirmed">Confirmed</span></td>
+            </tr>
+
+            <tr>
+                <td>12:00</td>
+                <td>Noah Kumar</td>
+                <td>Dr. Emily Fernando</td>
+                <td>Dental Consultation</td>
+                <td><span class="status pending">Pending</span></td>
+            </tr>
+
+            <tr>
+                <td>14:30</td>
+                <td>Emma Martin</td>
+                <td>Dr. Sarah Perera</td>
+                <td>Root Canal Consultation</td>
+                <td><span class="status confirmed">Confirmed</span></td>
+            </tr>
+            </tbody>
+        </table>
+
+    </section>
+
+</main>
+
+</body>
+</html>
+

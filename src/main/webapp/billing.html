@@ -1,0 +1,241 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing | Sunrise Dental Clinic</title>
+
+    <style>
+        *{box-sizing:border-box;margin:0;padding:0}
+
+        body{
+            font-family:"Segoe UI",Arial,sans-serif;
+            background:linear-gradient(135deg,#c9f3f5,#e9f8fa,#b9e7f0);
+            color:#16343b;min-height:100vh
+        }
+
+        .sidebar{
+            position:fixed;left:0;top:0;width:250px;height:100vh;
+            background:#064d60;color:white;padding:28px 18px
+        }
+
+        .brand{display:flex;align-items:center;gap:12px;margin-bottom:40px}
+        .brand-icon{font-size:32px}.brand h2{font-size:19px}
+        .brand span{display:block;font-size:11px;opacity:.7;margin-top:3px}
+
+        .menu-title{font-size:11px;opacity:.6;margin:20px 12px 10px;letter-spacing:1px}
+
+        .nav a{
+            display:block;text-decoration:none;color:white;padding:12px 14px;
+            border-radius:10px;margin-bottom:5px;font-size:14px
+        }
+
+        .nav a:hover,.nav a.active{background:#087f8c}
+
+        .online{position:absolute;bottom:25px;left:25px;font-size:13px}
+        .online-dot{
+            display:inline-block;width:8px;height:8px;background:#5be39a;
+            border-radius:50%;margin-right:7px
+        }
+
+        .main{margin-left:250px;padding:35px}
+
+        .topbar{
+            display:flex;justify-content:space-between;align-items:center;
+            margin-bottom:28px
+        }
+
+        .topbar h1{color:#064d60;font-size:28px}
+        .topbar p{color:#45656d;margin-top:5px}
+
+        .profile{
+            background:rgba(255,255,255,.75);padding:10px 18px;
+            border-radius:14px;box-shadow:0 5px 20px rgba(0,0,0,.06)
+        }
+
+        .profile strong{display:block}
+        .profile span{font-size:12px;color:#789097}
+
+        .card{
+            background:rgba(255,255,255,.9);border-radius:18px;
+            padding:25px;margin-bottom:25px;
+            box-shadow:0 10px 30px rgba(6,77,96,.09)
+        }
+
+        .form-grid{
+            display:grid;grid-template-columns:repeat(2,1fr);gap:18px
+        }
+
+        label{display:block;font-size:13px;font-weight:600;margin-bottom:7px}
+
+        input,select{
+            width:100%;padding:12px;border:1px solid #c9dfe2;
+            border-radius:9px;background:white;outline:none
+        }
+
+        .invoice{
+            max-width:850px;margin:auto
+        }
+
+        .invoice-title{
+            text-align:center;color:#064d60;margin-bottom:25px
+        }
+
+        .invoice-title h2{font-size:23px}
+
+        .invoice-line{
+            display:flex;justify-content:space-between;
+            padding:14px 0;border-bottom:1px solid #e5eeee
+        }
+
+        .total{
+            display:flex;justify-content:space-between;
+            font-size:20px;font-weight:700;color:#064d60;
+            padding-top:20px
+        }
+
+        .btn{
+            border:none;background:#075f70;color:white;padding:12px 20px;
+            border-radius:9px;cursor:pointer;font-weight:600
+        }
+
+        .actions{
+            margin-top:25px;display:flex;justify-content:flex-end;gap:10px
+        }
+
+        .secondary{background:#e6f3f5;color:#075f70}
+
+        @media(max-width:900px){
+            .sidebar{width:210px}.main{margin-left:210px}
+            .form-grid{grid-template-columns:1fr}
+        }
+    </style>
+</head>
+
+<body>
+
+<aside class="sidebar">
+
+    <div class="brand">
+        <div class="brand-icon">🦷</div>
+        <div>
+            <h2>Sunrise Dental</h2>
+            <span>Clinic Management System</span>
+        </div>
+    </div>
+
+    <div class="menu-title">MAIN MENU</div>
+
+    <nav class="nav">
+        <a href="dashboard.html">▣ Dashboard</a>
+        <a href="patients.html">♙ Patients</a>
+        <a href="appointments.html">▣ Appointments</a>
+        <a href="dentists.html">♙ Dentists</a>
+        <a href="treatments.html">▣ Treatments</a>
+        <a class="active" href="billing.html">▣ Billing</a>
+        <a href="reports.html">▤ Reports</a>
+        <a href="settings.html">⚙ Settings</a>
+    </nav>
+
+    <div class="online">
+        <span class="online-dot"></span>System Online
+    </div>
+
+</aside>
+
+<main class="main">
+
+    <div class="topbar">
+        <div>
+            <h1>Billing</h1>
+            <p>Create, calculate and print patient bills.</p>
+        </div>
+
+        <div class="profile">
+            <strong>Admin User</strong>
+            <span>Administrator</span>
+        </div>
+    </div>
+
+    <section class="card">
+
+        <div class="invoice">
+
+            <div class="invoice-title">
+                <h2>Create Patient Bill</h2>
+                <p>Sunrise Dental Clinic</p>
+            </div>
+
+            <div class="form-grid">
+
+                <div>
+                    <label>Patient</label>
+                    <select>
+                        <option>Select patient</option>
+                        <option>Amelia Silva</option>
+                        <option>Ryan James</option>
+                        <option>Noah Kumar</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Appointment Number</label>
+                    <input type="text" placeholder="Enter appointment number">
+                </div>
+
+                <div>
+                    <label>Treatment</label>
+                    <select>
+                        <option>Select treatment</option>
+                        <option>Routine Dental Check-up</option>
+                        <option>Teeth Cleaning</option>
+                        <option>Root Canal Treatment</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Consultation Fee</label>
+                    <input type="number" value="2500">
+                </div>
+
+                <div>
+                    <label>Treatment Cost</label>
+                    <input type="number" value="4500">
+                </div>
+
+            </div>
+
+            <div style="margin-top:30px">
+
+                <div class="invoice-line">
+                    <span>Treatment Cost</span>
+                    <strong>LKR 4,500.00</strong>
+                </div>
+
+                <div class="invoice-line">
+                    <span>Consultation Fee</span>
+                    <strong>LKR 2,500.00</strong>
+                </div>
+
+                <div class="total">
+                    <span>Total</span>
+                    <span>LKR 7,000.00</span>
+                </div>
+
+            </div>
+
+            <div class="actions">
+                <button class="btn secondary" type="button">Clear</button>
+                <button class="btn" type="button" onclick="window.print()">🖨 Print Bill</button>
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+</body>
+</html>
+
