@@ -5,15 +5,19 @@ import org.example.dao.PatientDAO;
 import org.example.model.Appointment;
 import org.example.model.Patient;
 
+import java.util.List;
+
 public class AppointmentService {
 
     private final AppointmentDAO appointmentDAO;
     private final PatientDAO patientDAO;
 
     public AppointmentService() {
+
         appointmentDAO = new AppointmentDAO();
         patientDAO = new PatientDAO();
     }
+
 
     public boolean registerAppointment(
             Patient patient,
@@ -31,7 +35,8 @@ public class AppointmentService {
             return false;
         }
 
-        int patientId = patientDAO.addPatient(patient);
+        int patientId =
+                patientDAO.addPatient(patient);
 
         if (patientId == -1) {
             return false;
@@ -39,13 +44,24 @@ public class AppointmentService {
 
         appointment.setPatientId(patientId);
 
-        return appointmentDAO.addAppointment(appointment);
+        return appointmentDAO.addAppointment(
+                appointment
+        );
     }
 
-    public Appointment searchAppointment(String appointmentNumber) {
+
+    public List<Appointment> getAllAppointments() {
+
+        return appointmentDAO.getAllAppointments();
+    }
+
+
+    public Appointment searchAppointment(
+            String appointmentNumber) {
 
         if (appointmentNumber == null ||
                 appointmentNumber.trim().isEmpty()) {
+
             return null;
         }
 
@@ -54,7 +70,9 @@ public class AppointmentService {
         );
     }
 
-    private boolean isValidPatient(Patient patient) {
+
+    private boolean isValidPatient(
+            Patient patient) {
 
         return patient.getPatientName() != null &&
                 !patient.getPatientName().trim().isEmpty() &&
@@ -64,10 +82,13 @@ public class AppointmentService {
                 !patient.getContactNumber().trim().isEmpty();
     }
 
-    private boolean isValidAppointment(Appointment appointment) {
+
+    private boolean isValidAppointment(
+            Appointment appointment) {
 
         return appointment.getAppointmentNumber() != null &&
-                !appointment.getAppointmentNumber().trim().isEmpty() &&
+                !appointment.getAppointmentNumber()
+                        .trim().isEmpty() &&
                 appointment.getAppointmentDate() != null &&
                 appointment.getAppointmentTime() != null &&
                 appointment.getDentistId() > 0 &&

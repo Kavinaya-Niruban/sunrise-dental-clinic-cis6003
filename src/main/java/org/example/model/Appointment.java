@@ -13,12 +13,22 @@ public class Appointment {
     private LocalDate appointmentDate;
     private LocalTime appointmentTime;
 
+    // Display information
+    private String patientName;
+    private String dentistName;
+    private String treatmentName;
+
     public Appointment() {
     }
 
-    public Appointment(int appointmentId, String appointmentNumber,
-                       int patientId, int dentistId, int treatmentId,
-                       LocalDate appointmentDate, LocalTime appointmentTime) {
+    public Appointment(
+            int appointmentId,
+            String appointmentNumber,
+            int patientId,
+            int dentistId,
+            int treatmentId,
+            LocalDate appointmentDate,
+            LocalTime appointmentTime) {
 
         this.appointmentId = appointmentId;
         this.appointmentNumber = appointmentNumber;
@@ -83,5 +93,29 @@ public class Appointment {
 
     public void setAppointmentTime(LocalTime appointmentTime) {
         this.appointmentTime = appointmentTime;
+    }
+
+    public String getPatientName() {
+        return patientName;
+    }
+
+    public void setPatientName(String patientName) {
+        this.patientName = patientName;
+    }
+
+    public String getDentistName() {
+        return dentistName;
+    }
+
+    public void setDentistName(String dentistName) {
+        this.dentistName = dentistName;
+    }
+
+    public String getTreatmentName() {
+        return treatmentName;
+    }
+
+    public void setTreatmentName(String treatmentName) {
+        this.treatmentName = treatmentName;
     }
 }

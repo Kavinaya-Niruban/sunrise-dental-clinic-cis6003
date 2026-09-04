@@ -252,12 +252,6 @@
 
         <div class="card-header">
             <h2>Treatment Catalogue</h2>
-
-            <input
-                    id="searchTreatment"
-                    style="width:220px"
-                    type="search"
-                    placeholder="Search treatment...">
         </div>
 
         <table>
@@ -371,23 +365,6 @@
 
         return div.innerHTML;
     }
-
-    document
-        .getElementById("searchTreatment")
-        .addEventListener("input", function () {
-
-            const searchTerm =
-                this.value.toLowerCase().trim();
-
-            const filteredTreatments =
-                treatments.filter(treatment =>
-                    treatment.treatmentName.toLowerCase().includes(searchTerm) ||
-                    treatment.description.toLowerCase().includes(searchTerm) ||
-                    treatment.duration.toLowerCase().includes(searchTerm)
-                );
-
-            displayTreatments(filteredTreatments);
-        });
 
     const params =
         new URLSearchParams(window.location.search);

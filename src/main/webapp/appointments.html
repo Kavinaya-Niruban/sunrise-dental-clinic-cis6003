@@ -1,5 +1,4 @@
-
-<!DOCTYPE html>
+<!DOCTYPE html><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -164,6 +163,11 @@
             background: #087f8c;
         }
 
+        .btn-secondary {
+            background: #e6f3f5;
+            color: #075f70;
+        }
+
         .form-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -198,9 +202,86 @@
             gap: 10px;
         }
 
-        .btn-secondary {
-            background: #e6f3f5;
-            color: #075f70;
+        .message {
+            display: none;
+            padding: 12px 15px;
+            border-radius: 9px;
+            margin-bottom: 18px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .success {
+            background: #e4f7ed;
+            color: #267653;
+        }
+
+        .error {
+            background: #fdeaea;
+            color: #b54848;
+        }
+
+        /* SEARCH */
+
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 22px;
+        }
+
+        .search-box input {
+            max-width: 400px;
+        }
+
+        .search-result {
+            display: none;
+            background: #f4fbfc;
+            border: 1px solid #c9e4e7;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 22px;
+        }
+
+        .search-result h3 {
+            color: #064d60;
+            margin-bottom: 15px;
+            font-size: 17px;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .detail-item {
+            background: white;
+            padding: 13px;
+            border-radius: 9px;
+        }
+
+        .detail-label {
+            font-size: 11px;
+            color: #789097;
+            margin-bottom: 5px;
+        }
+
+        .detail-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #16343b;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 25px;
+            color: #789097;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 25px;
+            color: #789097;
         }
 
         table {
@@ -222,29 +303,25 @@
             font-size: 13px;
         }
 
-        .status {
-            padding: 6px 10px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 600;
+        .appointment-number {
+            font-weight: 700;
+            color: #075f70;
         }
 
-        .confirmed {
-            background: #dff5eb;
-            color: #2e9b73;
-        }
+        @media(max-width: 1100px) {
 
-        .pending {
-            background: #fff0d5;
-            color: #b47716;
-        }
+            table {
+                font-size: 12px;
+            }
 
-        .cancelled {
-            background: #fbe3e3;
-            color: #c24d4d;
+            th,
+            td {
+                padding: 10px 8px;
+            }
         }
 
         @media(max-width: 900px) {
+
             .sidebar {
                 width: 210px;
             }
@@ -253,8 +330,17 @@
                 margin-left: 210px;
             }
 
-            .form-grid {
+            .form-grid,
+            .details-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .card {
+                overflow-x: auto;
+            }
+
+            table {
+                min-width: 700px;
             }
         }
     </style>
@@ -265,198 +351,368 @@
 <aside class="sidebar">
 
     <div class="brand">
+
         <div class="brand-icon">🦷</div>
+
         <div>
             <h2>Sunrise Dental</h2>
             <span>Clinic Management System</span>
         </div>
+
     </div>
+
 
     <div class="menu-title">MAIN MENU</div>
 
+
     <nav class="nav">
+
         <a href="dashboard.html">▣ Dashboard</a>
+
         <a href="patients.html">♙ Patients</a>
-        <a class="active" href="appointments.html">▣ Appointments</a>
+
+        <a class="active" href="appointments.html">
+            ▣ Appointments
+        </a>
+
         <a href="dentists.html">♙ Dentists</a>
+
         <a href="treatments.html">▣ Treatments</a>
+
         <a href="billing.html">▣ Billing</a>
+
         <a href="help.html">❓ Help</a>
+
         <a href="logout">↪ Logout</a>
+
     </nav>
 
+
     <div class="online">
-        <span class="online-dot"></span>System Online
+
+        <span class="online-dot"></span>
+        System Online
+
     </div>
 
 </aside>
 
+
 <main class="main">
 
     <div class="topbar">
+
         <div>
+
             <h1>Appointments</h1>
-            <p>Manage patient appointments and schedules.</p>
+
+            <p>
+                Manage patient appointments and schedules.
+            </p>
+
         </div>
 
+
         <div class="profile">
+
             <strong>Admin User</strong>
+
             <span>Administrator</span>
+
         </div>
+
     </div>
+
+
+    <!-- REGISTER APPOINTMENT -->
 
     <section class="card">
 
         <div class="card-header">
+
             <h2>Register New Appointment</h2>
+
         </div>
 
-        <form action="appointments" method="post">
+
+        <div
+                id="message"
+                class="message">
+        </div>
+
+
+        <form
+                action="appointments"
+                method="post">
 
             <div class="form-grid">
 
                 <div>
-                    <label>Appointment Number</label>
-                    <input type="text"
-                           name="appointmentNumber"
-                           placeholder="e.g. APT-001"
-                           required>
+
+                    <label>
+                        Appointment Number
+                    </label>
+
+                    <input
+                            type="text"
+                            name="appointmentNumber"
+                            placeholder="e.g. APT-001"
+                            required>
+
                 </div>
 
-                <div>
-                    <label>Patient Name</label>
-                    <input type="text"
-                           name="patientName"
-                           placeholder="Enter patient name"
-                           required>
-                </div>
 
                 <div>
-                    <label>Contact Number</label>
-                    <input type="text"
-                           name="contactNumber"
-                           placeholder="Enter contact number"
-                           required>
+
+                    <label>
+                        Patient Name
+                    </label>
+
+                    <input
+                            type="text"
+                            name="patientName"
+                            placeholder="Enter patient name"
+                            required>
+
                 </div>
 
-                <div>
-                    <label>Address</label>
-                    <input type="text"
-                           name="address"
-                           placeholder="Enter patient address"
-                           required>
-                </div>
 
                 <div>
-                    <label>Dentist</label>
-                    <select name="dentistId" required>
-                        <option value="">Select dentist</option>
-                        <option value="1">Dr. Sarah Perera</option>
-                        <option value="2">Dr. Michael Silva</option>
-                        <option value="3">Dr. Emily Fernando</option>
+
+                    <label>
+                        Contact Number
+                    </label>
+
+                    <input
+                            type="text"
+                            name="contactNumber"
+                            placeholder="Enter contact number"
+                            required>
+
+                </div>
+
+
+                <div>
+
+                    <label>
+                        Address
+                    </label>
+
+                    <input
+                            type="text"
+                            name="address"
+                            placeholder="Enter patient address"
+                            required>
+
+                </div>
+
+
+                <div>
+
+                    <label>
+                        Dentist
+                    </label>
+
+                    <select
+                            id="dentistSelect"
+                            name="dentistId"
+                            required>
+
+                        <option value="">
+                            Loading dentists...
+                        </option>
+
                     </select>
+
                 </div>
 
+
                 <div>
-                    <label>Treatment</label>
-                    <select name="treatmentId" required>
-                        <option value="">Select treatment</option>
-                        <option value="1">Routine Dental Check-up</option>
-                        <option value="2">Teeth Cleaning</option>
-                        <option value="3">Dental Consultation</option>
-                        <option value="4">Root Canal Treatment</option>
+
+                    <label>
+                        Treatment
+                    </label>
+
+                    <select
+                            id="treatmentSelect"
+                            name="treatmentId"
+                            required>
+
+                        <option value="">
+                            Loading treatments...
+                        </option>
+
                     </select>
+
                 </div>
 
-                <div>
-                    <label>Appointment Date</label>
-                    <input type="date"
-                           name="appointmentDate"
-                           required>
-                </div>
 
                 <div>
-                    <label>Appointment Time</label>
-                    <input type="time"
-                           name="appointmentTime"
-                           required>
+
+                    <label>
+                        Appointment Date
+                    </label>
+
+                    <input
+                            type="date"
+                            name="appointmentDate"
+                            required>
+
+                </div>
+
+
+                <div>
+
+                    <label>
+                        Appointment Time
+                    </label>
+
+                    <input
+                            type="time"
+                            name="appointmentTime"
+                            required>
+
                 </div>
 
             </div>
 
+
             <div class="form-actions">
-                <button class="btn" type="submit">
+
+                <button
+                        class="btn"
+                        type="submit">
+
                     + Register Appointment
+
                 </button>
 
-                <button class="btn btn-secondary" type="reset">
+
+                <button
+                        class="btn btn-secondary"
+                        type="reset">
+
                     Clear
+
                 </button>
+
             </div>
 
         </form>
 
     </section>
 
+
+    <!-- SEARCH APPOINTMENT -->
+
     <section class="card">
 
         <div class="card-header">
-            <h2>Today's Appointments</h2>
-            <input style="width:220px" type="search" placeholder="Search appointment...">
+
+            <h2>
+                Display Appointment Details
+            </h2>
+
         </div>
+
+
+        <div class="search-box">
+
+            <input
+                    type="text"
+                    id="appointmentSearch"
+                    placeholder="Enter appointment number e.g. APT-001">
+
+
+            <button
+                    class="btn"
+                    type="button"
+                    onclick="searchAppointment()">
+
+                🔍 Search
+
+            </button>
+
+
+            <button
+                    class="btn btn-secondary"
+                    type="button"
+                    onclick="clearSearch()">
+
+                Clear
+
+            </button>
+
+        </div>
+
+
+        <div
+                id="searchResult"
+                class="search-result">
+
+            <h3>
+                Appointment Details
+            </h3>
+
+
+            <div
+                    id="detailsGrid"
+                    class="details-grid">
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- APPOINTMENT RECORDS -->
+
+    <section class="card">
+
+        <div class="card-header">
+
+            <h2>
+                Appointment Records
+            </h2>
+
+        </div>
+
 
         <table>
 
             <thead>
+
             <tr>
-                <th>Time</th>
+
+                <th>Appointment No.</th>
+
                 <th>Patient</th>
+
                 <th>Dentist</th>
+
                 <th>Treatment</th>
-                <th>Status</th>
+
+                <th>Date</th>
+
+                <th>Time</th>
+
             </tr>
+
             </thead>
 
-            <tbody>
+
+            <tbody id="appointmentTableBody">
 
             <tr>
-                <td>09:00</td>
-                <td>Amelia Silva</td>
-                <td>Dr. Sarah Perera</td>
-                <td>Routine Dental Check-up</td>
-                <td>
-                    <span class="status confirmed">Confirmed</span>
-                </td>
-            </tr>
 
-            <tr>
-                <td>10:30</td>
-                <td>Ryan James</td>
-                <td>Dr. Michael Silva</td>
-                <td>Teeth Cleaning</td>
-                <td>
-                    <span class="status confirmed">Confirmed</span>
-                </td>
-            </tr>
+                <td
+                        colspan="6"
+                        class="loading">
 
-            <tr>
-                <td>12:00</td>
-                <td>Noah Kumar</td>
-                <td>Dr. Emily Fernando</td>
-                <td>Dental Consultation</td>
-                <td>
-                    <span class="status pending">Pending</span>
-                </td>
-            </tr>
+                    Loading appointments...
 
-            <tr>
-                <td>14:30</td>
-                <td>Emma Martin</td>
-                <td>Dr. Sarah Perera</td>
-                <td>Root Canal Consultation</td>
-                <td>
-                    <span class="status confirmed">Confirmed</span>
                 </td>
+
             </tr>
 
             </tbody>
@@ -466,6 +722,661 @@
     </section>
 
 </main>
+
+
+<script>
+
+    let appointments = [];
+
+
+    // LOAD ALL APPOINTMENTS
+
+    function loadAppointments() {
+
+        fetch("appointments")
+
+            .then(response => {
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Unable to load appointments."
+                    );
+
+                }
+
+                return response.json();
+
+            })
+
+            .then(data => {
+
+                appointments = data;
+
+                displayAppointments(
+                    appointments
+                );
+
+            })
+
+            .catch(error => {
+
+                document.getElementById(
+                    "appointmentTableBody"
+                ).innerHTML =
+
+                    `<tr>
+                        <td colspan="6" class="empty">
+                            Unable to load appointments.
+                        </td>
+                    </tr>`;
+
+                console.error(error);
+
+            });
+
+    }
+
+
+    // DISPLAY APPOINTMENT RECORDS
+
+    function displayAppointments(
+        appointmentList) {
+
+        const tableBody =
+            document.getElementById(
+                "appointmentTableBody"
+            );
+
+
+        if (appointmentList.length === 0) {
+
+            tableBody.innerHTML =
+
+                `<tr>
+                    <td colspan="6" class="empty">
+                        No appointment records found.
+                    </td>
+                </tr>`;
+
+            return;
+        }
+
+
+        tableBody.innerHTML = "";
+
+
+        appointmentList.forEach(
+            appointment => {
+
+                const row =
+                    document.createElement("tr");
+
+
+                const formattedDate =
+                    formatDate(
+                        appointment.appointmentDate
+                    );
+
+
+                const formattedTime =
+                    formatTime(
+                        appointment.appointmentTime
+                    );
+
+
+                row.innerHTML = `
+
+                    <td class="appointment-number">
+                        ${escapeHtml(
+                    appointment.appointmentNumber
+                )}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                    appointment.patientName
+                )}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                    appointment.dentistName
+                )}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(
+                    appointment.treatmentName
+                )}
+                    </td>
+
+                    <td>
+                        ${formattedDate}
+                    </td>
+
+                    <td>
+                        ${formattedTime}
+                    </td>
+
+                `;
+
+
+                tableBody.appendChild(row);
+
+            });
+
+    }
+
+
+    // SEARCH BY APPOINTMENT NUMBER
+
+    function searchAppointment() {
+
+        const appointmentNumber =
+            document.getElementById(
+                "appointmentSearch"
+            ).value.trim();
+
+
+        if (!appointmentNumber) {
+
+            alert(
+                "Please enter an appointment number."
+            );
+
+            return;
+        }
+
+
+        fetch(
+            "appointments?appointmentNumber=" +
+            encodeURIComponent(
+                appointmentNumber
+            )
+        )
+
+            .then(response => {
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Appointment not found."
+                    );
+
+                }
+
+                return response.json();
+
+            })
+
+            .then(appointment => {
+
+                displayAppointmentDetails(
+                    appointment
+                );
+
+            })
+
+            .catch(error => {
+
+                const result =
+                    document.getElementById(
+                        "searchResult"
+                    );
+
+
+                result.style.display =
+                    "block";
+
+
+                result.innerHTML =
+
+                    `<h3>
+                        Appointment Details
+                    </h3>
+
+                    <div class="empty">
+                        Appointment not found.
+                    </div>`;
+
+
+                console.error(error);
+
+            });
+
+    }
+
+
+    // DISPLAY COMPLETE APPOINTMENT DETAILS
+
+    function displayAppointmentDetails(
+        appointment) {
+
+        const result =
+            document.getElementById(
+                "searchResult"
+            );
+
+
+        const detailsGrid =
+            document.getElementById(
+                "detailsGrid"
+            );
+
+
+        detailsGrid.innerHTML = `
+
+            <div class="detail-item">
+
+                <div class="detail-label">
+                    Appointment Number
+                </div>
+
+                <div class="detail-value">
+
+                    ${escapeHtml(
+            appointment.appointmentNumber
+        )}
+
+                </div>
+
+            </div>
+
+
+            <div class="detail-item">
+
+                <div class="detail-label">
+                    Patient Name
+                </div>
+
+                <div class="detail-value">
+
+                    ${escapeHtml(
+            appointment.patientName
+        )}
+
+                </div>
+
+            </div>
+
+
+            <div class="detail-item">
+
+                <div class="detail-label">
+                    Dentist
+                </div>
+
+                <div class="detail-value">
+
+                    ${escapeHtml(
+            appointment.dentistName
+        )}
+
+                </div>
+
+            </div>
+
+
+            <div class="detail-item">
+
+                <div class="detail-label">
+                    Treatment
+                </div>
+
+                <div class="detail-value">
+
+                    ${escapeHtml(
+            appointment.treatmentName
+        )}
+
+                </div>
+
+            </div>
+
+
+            <div class="detail-item">
+
+                <div class="detail-label">
+                    Appointment Date
+                </div>
+
+                <div class="detail-value">
+
+                    ${formatDate(
+            appointment.appointmentDate
+        )}
+
+                </div>
+
+            </div>
+
+
+            <div class="detail-item">
+
+                <div class="detail-label">
+                    Appointment Time
+                </div>
+
+                <div class="detail-value">
+
+                    ${formatTime(
+            appointment.appointmentTime
+        )}
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        result.style.display =
+            "block";
+
+    }
+
+
+    // CLEAR SEARCH
+
+    function clearSearch() {
+
+        document.getElementById(
+            "appointmentSearch"
+        ).value = "";
+
+
+        document.getElementById(
+            "searchResult"
+        ).style.display = "none";
+
+    }
+
+
+    // DATE FORMAT
+
+    function formatDate(dateString) {
+
+        if (!dateString) {
+            return "";
+        }
+
+
+        const parts =
+            dateString.split("-");
+
+
+        if (parts.length !== 3) {
+            return dateString;
+        }
+
+
+        return `${parts[2]}/${parts[1]}/${parts[0]}`;
+
+    }
+
+
+    // TIME FORMAT
+
+    function formatTime(timeString) {
+
+        if (!timeString) {
+            return "";
+        }
+
+
+        const parts =
+            timeString.split(":");
+
+
+        if (parts.length < 2) {
+            return timeString;
+        }
+
+
+        let hour =
+            parseInt(parts[0]);
+
+
+        const minute =
+            parts[1];
+
+
+        const period =
+            hour >= 12
+                ? "PM"
+                : "AM";
+
+
+        hour =
+            hour % 12 || 12;
+
+
+        return `${hour}:${minute} ${period}`;
+
+    }
+
+
+    // HTML ESCAPE
+
+    function escapeHtml(value) {
+
+        const div =
+            document.createElement(
+                "div"
+            );
+
+
+        div.textContent =
+            value ?? "";
+
+
+        return div.innerHTML;
+
+    }
+
+
+    // LOAD DENTISTS
+
+    function loadDentists() {
+
+        fetch("dentists")
+
+            .then(response => {
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Unable to load dentists."
+                    );
+
+                }
+
+                return response.json();
+
+            })
+
+            .then(dentists => {
+
+                const select =
+                    document.getElementById(
+                        "dentistSelect"
+                    );
+
+
+                select.innerHTML =
+                    '<option value="">Select dentist</option>';
+
+
+                dentists.forEach(
+                    dentist => {
+
+                        const option =
+                            document.createElement(
+                                "option"
+                            );
+
+
+                        option.value =
+                            dentist.dentistId;
+
+
+                        option.textContent =
+                            dentist.dentistName;
+
+
+                        select.appendChild(
+                            option
+                        );
+
+                    });
+
+            })
+
+            .catch(error => {
+
+                document.getElementById(
+                    "dentistSelect"
+                ).innerHTML =
+
+                    '<option value="">Unable to load dentists</option>';
+
+                console.error(error);
+
+            });
+
+    }
+
+
+    // LOAD TREATMENTS
+
+    function loadTreatments() {
+
+        fetch("treatments")
+
+            .then(response => {
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Unable to load treatments."
+                    );
+
+                }
+
+                return response.json();
+
+            })
+
+            .then(treatments => {
+
+                const select =
+                    document.getElementById(
+                        "treatmentSelect"
+                    );
+
+
+                select.innerHTML =
+                    '<option value="">Select treatment</option>';
+
+
+                treatments.forEach(
+                    treatment => {
+
+                        const option =
+                            document.createElement(
+                                "option"
+                            );
+
+
+                        option.value =
+                            treatment.treatmentId;
+
+
+                        option.textContent =
+                            treatment.treatmentName;
+
+
+                        select.appendChild(
+                            option
+                        );
+
+                    });
+
+            })
+
+            .catch(error => {
+
+                document.getElementById(
+                    "treatmentSelect"
+                ).innerHTML =
+
+                    '<option value="">Unable to load treatments</option>';
+
+                console.error(error);
+
+            });
+
+    }
+
+
+    // SUCCESS / ERROR MESSAGE
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const message =
+        document.getElementById(
+            "message"
+        );
+
+
+    if (params.get("success") === "true") {
+
+        message.textContent =
+            "Appointment registered successfully.";
+
+
+        message.classList.add(
+            "success"
+        );
+
+
+        message.style.display =
+            "block";
+
+    }
+
+
+    if (params.get("error")) {
+
+        message.textContent =
+            "Unable to register appointment. Please check the entered details.";
+
+
+        message.classList.add(
+            "error"
+        );
+
+
+        message.style.display =
+            "block";
+
+    }
+
+
+    // START PAGE
+
+    loadDentists();
+
+    loadTreatments();
+
+    loadAppointments();
+
+</script>
 
 </body>
 </html>
