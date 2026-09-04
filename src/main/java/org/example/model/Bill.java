@@ -11,9 +11,12 @@ public class Bill {
     public Bill() {
     }
 
-    public Bill(int billId, int appointmentId,
-                double treatmentCost, double consultationFee,
-                double totalAmount) {
+    public Bill(
+            int billId,
+            int appointmentId,
+            double treatmentCost,
+            double consultationFee,
+            double totalAmount) {
 
         this.billId = billId;
         this.appointmentId = appointmentId;

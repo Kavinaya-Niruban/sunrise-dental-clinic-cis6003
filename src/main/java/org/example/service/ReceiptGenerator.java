@@ -1,7 +1,6 @@
 package org.example.service;
 
 import org.example.model.Bill;
-import org.example.model.Payment;
 
 public class ReceiptGenerator {
 
