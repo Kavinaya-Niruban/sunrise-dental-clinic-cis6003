@@ -18,15 +18,13 @@ public class AppointmentDAO {
                 INSERT INTO appointments
                 (
                     appointment_number,
-                    patient_name,
-                    address,
-                    contact_number,
+                    patient_id,
                     dentist_id,
                     treatment_id,
                     appointment_date,
                     appointment_time
                 )
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                VALUES (?, ?, ?, ?, ?, ?)
                 """;
 
         try (Connection connection =
@@ -40,40 +38,30 @@ public class AppointmentDAO {
                     appointment.getAppointmentNumber()
             );
 
-            statement.setString(
+            statement.setInt(
                     2,
-                    appointment.getPatientName()
-            );
-
-            statement.setString(
-                    3,
-                    appointment.getAddress()
-            );
-
-            statement.setString(
-                    4,
-                    appointment.getContactNumber()
+                    appointment.getPatientId()
             );
 
             statement.setInt(
-                    5,
+                    3,
                     appointment.getDentistId()
             );
 
             statement.setInt(
-                    6,
+                    4,
                     appointment.getTreatmentId()
             );
 
             statement.setDate(
-                    7,
+                    5,
                     java.sql.Date.valueOf(
                             appointment.getAppointmentDate()
                     )
             );
 
             statement.setTime(
-                    8,
+                    6,
                     java.sql.Time.valueOf(
                             appointment.getAppointmentTime()
                     )
@@ -101,20 +89,25 @@ public class AppointmentDAO {
                 SELECT
                     a.appointment_id,
                     a.appointment_number,
-                    a.patient_name,
-                    a.address,
-                    a.contact_number,
+                    a.patient_id,
                     a.dentist_id,
                     a.treatment_id,
                     a.appointment_date,
                     a.appointment_time,
+                    p.patient_name,
                     d.dentist_name,
                     t.treatment_name
                 FROM appointments a
+
+                INNER JOIN patients p
+                    ON a.patient_id = p.patient_id
+
                 INNER JOIN dentists d
                     ON a.dentist_id = d.dentist_id
+
                 INNER JOIN treatments t
                     ON a.treatment_id = t.treatment_id
+
                 ORDER BY
                     a.appointment_date DESC,
                     a.appointment_time ASC
@@ -132,7 +125,7 @@ public class AppointmentDAO {
             while (resultSet.next()) {
 
                 Appointment appointment =
-                        createAppointmentFromResultSet(
+                        createAppointment(
                                 resultSet
                         );
 
@@ -155,20 +148,25 @@ public class AppointmentDAO {
                 SELECT
                     a.appointment_id,
                     a.appointment_number,
-                    a.patient_name,
-                    a.address,
-                    a.contact_number,
+                    a.patient_id,
                     a.dentist_id,
                     a.treatment_id,
                     a.appointment_date,
                     a.appointment_time,
+                    p.patient_name,
                     d.dentist_name,
                     t.treatment_name
                 FROM appointments a
+
+                INNER JOIN patients p
+                    ON a.patient_id = p.patient_id
+
                 INNER JOIN dentists d
                     ON a.dentist_id = d.dentist_id
+
                 INNER JOIN treatments t
                     ON a.treatment_id = t.treatment_id
+
                 WHERE a.appointment_number = ?
                 """;
 
@@ -188,7 +186,7 @@ public class AppointmentDAO {
 
                 if (resultSet.next()) {
 
-                    return createAppointmentFromResultSet(
+                    return createAppointment(
                             resultSet
                     );
                 }
@@ -203,59 +201,57 @@ public class AppointmentDAO {
     }
 
 
-    private Appointment createAppointmentFromResultSet(
+    private Appointment createAppointment(
             ResultSet resultSet)
             throws Exception {
 
         Appointment appointment =
-                new Appointment();
+                new Appointment(
+                        resultSet.getInt(
+                                "appointment_id"
+                        ),
 
-        appointment.setAppointmentId(
-                resultSet.getInt("appointment_id")
-        );
+                        resultSet.getString(
+                                "appointment_number"
+                        ),
 
-        appointment.setAppointmentNumber(
-                resultSet.getString("appointment_number")
-        );
+                        resultSet.getInt(
+                                "patient_id"
+                        ),
+
+                        resultSet.getInt(
+                                "dentist_id"
+                        ),
+
+                        resultSet.getInt(
+                                "treatment_id"
+                        ),
+
+                        resultSet.getDate(
+                                "appointment_date"
+                        ).toLocalDate(),
+
+                        resultSet.getTime(
+                                "appointment_time"
+                        ).toLocalTime()
+                );
 
         appointment.setPatientName(
-                resultSet.getString("patient_name")
-        );
-
-        appointment.setAddress(
-                resultSet.getString("address")
-        );
-
-        appointment.setContactNumber(
-                resultSet.getString("contact_number")
-        );
-
-        appointment.setDentistId(
-                resultSet.getInt("dentist_id")
-        );
-
-        appointment.setTreatmentId(
-                resultSet.getInt("treatment_id")
-        );
-
-        appointment.setAppointmentDate(
-                resultSet.getDate(
-                        "appointment_date"
-                ).toLocalDate()
-        );
-
-        appointment.setAppointmentTime(
-                resultSet.getTime(
-                        "appointment_time"
-                ).toLocalTime()
+                resultSet.getString(
+                        "patient_name"
+                )
         );
 
         appointment.setDentistName(
-                resultSet.getString("dentist_name")
+                resultSet.getString(
+                        "dentist_name"
+                )
         );
 
         appointment.setTreatmentName(
-                resultSet.getString("treatment_name")
+                resultSet.getString(
+                        "treatment_name"
+                )
         );
 
         return appointment;

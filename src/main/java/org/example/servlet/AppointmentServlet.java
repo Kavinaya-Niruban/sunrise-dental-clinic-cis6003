@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import org.example.model.Appointment;
+import org.example.model.Patient;
 import org.example.service.AppointmentService;
 
 import java.io.IOException;
@@ -29,12 +30,16 @@ public class AppointmentServlet extends HttpServlet {
         try {
 
             String appointmentNumber =
-                    request.getParameter("appointmentNumber");
+                    request.getParameter(
+                            "appointmentNumber"
+                    );
 
-            response.setContentType("application/json");
+            response.setContentType(
+                    "application/json"
+            );
+
             response.setCharacterEncoding("UTF-8");
 
-            // SEARCH BY APPOINTMENT NUMBER
             if (appointmentNumber != null &&
                     !appointmentNumber.trim().isEmpty()) {
 
@@ -57,13 +62,14 @@ public class AppointmentServlet extends HttpServlet {
                 }
 
                 response.getWriter().print(
-                        appointmentToJson(appointment)
+                        appointmentToJson(
+                                appointment
+                        )
                 );
 
                 return;
             }
 
-            // LOAD ALL APPOINTMENTS
             List<Appointment> appointments =
                     appointmentService.getAllAppointments();
 
@@ -73,11 +79,10 @@ public class AppointmentServlet extends HttpServlet {
                  i < appointments.size();
                  i++) {
 
-                Appointment appointment =
-                        appointments.get(i);
-
                 response.getWriter().print(
-                        appointmentToJson(appointment)
+                        appointmentToJson(
+                                appointments.get(i)
+                        )
                 );
 
                 if (i < appointments.size() - 1) {
@@ -158,13 +163,19 @@ public class AppointmentServlet extends HttpServlet {
                             )
                     );
 
+            Patient patient =
+                    new Patient(
+                            0,
+                            patientName,
+                            address,
+                            contactNumber
+                    );
+
             Appointment appointment =
                     new Appointment(
                             0,
                             appointmentNumber,
-                            patientName,
-                            address,
-                            contactNumber,
+                            0,
                             dentistId,
                             treatmentId,
                             appointmentDate,
@@ -173,6 +184,7 @@ public class AppointmentServlet extends HttpServlet {
 
             boolean success =
                     appointmentService.registerAppointment(
+                            patient,
                             appointment
                     );
 
@@ -204,6 +216,7 @@ public class AppointmentServlet extends HttpServlet {
             Appointment appointment) {
 
         return "{"
+
                 + "\"appointmentId\":"
                 + appointment.getAppointmentId()
 
@@ -216,18 +229,6 @@ public class AppointmentServlet extends HttpServlet {
                 + ",\"patientName\":\""
                 + escapeJson(
                 appointment.getPatientName()
-        )
-                + "\""
-
-                + ",\"address\":\""
-                + escapeJson(
-                appointment.getAddress()
-        )
-                + "\""
-
-                + ",\"contactNumber\":\""
-                + escapeJson(
-                appointment.getContactNumber()
         )
                 + "\""
 

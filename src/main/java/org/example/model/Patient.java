@@ -10,7 +10,12 @@ public class Patient {
     public Patient() {
     }
 
-    public Patient(int patientId, String patientName, String address, String contactNumber) {
+    public Patient(
+            int patientId,
+            String patientName,
+            String address,
+            String contactNumber) {
+
         this.patientId = patientId;
         this.patientName = patientName;
         this.address = address;
